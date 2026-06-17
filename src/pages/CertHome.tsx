@@ -24,13 +24,22 @@ export function CertHome() {
   return (
     <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} className="space-y-5">
       <section className={`overflow-hidden rounded-[2rem] bg-gradient-to-br ${meta.accent} p-5 text-white shadow-card sm:p-6`}>
-        <Badge className="mb-4 bg-white/20 text-white">{cert}</Badge>
-        <h1 className="text-3xl font-black tracking-tight sm:text-5xl">{meta.title}</h1>
-        <p className="mt-3 max-w-2xl text-base font-bold text-white/80">{meta.summary}</p>
-        <div className="mt-6 grid gap-3 sm:grid-cols-3">
-          <div className="rounded-[1.4rem] bg-white/15 p-4"><div className="text-4xl font-black">{readiness}%</div><p className="text-xs font-black opacity-80">EXAM READINESS</p></div>
-          <div className="rounded-[1.4rem] bg-white/15 p-4"><div className="text-xl font-black">{meta.quizFormat}</div><p className="text-xs font-black opacity-80">QUIZ SPRINTS</p></div>
-          <div className="rounded-[1.4rem] bg-white/15 p-4"><div className="text-xl font-black">Pass target {meta.readinessTarget}%</div><p className="text-xs font-black opacity-80">GOAL</p></div>
+        <Badge className="mb-3 bg-white/20 text-white">{cert}</Badge>
+        <h1 className="text-2xl font-black tracking-tight sm:text-5xl">{meta.title}</h1>
+        <p className="mt-3 max-w-2xl text-sm font-bold text-white/80 sm:text-base">{meta.summary}</p>
+        <div className="mt-5 grid grid-cols-3 gap-2 sm:gap-3">
+          <div className="rounded-[1.2rem] bg-white/15 p-3 sm:rounded-[1.4rem] sm:p-4">
+            <div className="text-3xl font-black sm:text-4xl">{readiness}%</div>
+            <p className="mt-0.5 text-xs font-black opacity-80">READINESS</p>
+          </div>
+          <div className="rounded-[1.2rem] bg-white/15 p-3 sm:rounded-[1.4rem] sm:p-4">
+            <div className="text-xl font-black sm:text-2xl">10Q · 12m</div>
+            <p className="mt-0.5 text-xs font-black opacity-80">SPRINTS</p>
+          </div>
+          <div className="rounded-[1.2rem] bg-white/15 p-3 sm:rounded-[1.4rem] sm:p-4">
+            <div className="text-xl font-black sm:text-2xl">{meta.readinessTarget}%</div>
+            <p className="mt-0.5 text-xs font-black opacity-80">PASS TARGET</p>
+          </div>
         </div>
       </section>
 

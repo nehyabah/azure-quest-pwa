@@ -21,16 +21,28 @@ export function KnowledgeCheck() {
 
   return (
     <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} className="space-y-5">
-      <section className={`pro-panel rounded-2xl border border-emerald-900/10 p-5 text-emerald-950 shadow-card dark:border-emerald-300/10 dark:text-white sm:p-6`}>
+      <section className={`pro-panel rounded-2xl border border-blue-900/10 p-5 text-blue-950 shadow-card dark:border-blue-300/10 dark:text-white sm:p-6`}>
         <Badge className="mb-3">{cert} Exam Center</Badge>
         <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Practice exams and quizzes.</h1>
-        <p className="mt-3 max-w-2xl text-sm font-medium text-emerald-900/70 dark:text-emerald-50/75">Focused sprints and full mocks. Answers stay hidden until you finish, so timing stays realistic.</p>
+        <p className="mt-3 max-w-2xl text-sm font-medium text-blue-900/70 dark:text-blue-50/75">Focused sprints and full mocks. Answers stay hidden until you finish, so timing stays realistic.</p>
       </section>
 
-      <div className="grid gap-3 sm:grid-cols-3">
-        <Card><CardHeader><CardTitle>Quiz Sprints</CardTitle><Clock /></CardHeader><p className="font-semibold text-slate-500 dark:text-slate-400">10 questions · 12 minutes</p></Card>
-        <Card><CardHeader><CardTitle>Mock Exams</CardTitle><FileQuestion /></CardHeader><p className="font-semibold text-slate-500 dark:text-slate-400">50 questions · 100 minutes</p></Card>
-        <Card><CardHeader><CardTitle>Latest</CardTitle><BarChart3 /></CardHeader><p className="font-semibold text-slate-500 dark:text-slate-400">{latest ? `${latest.percentage}% · ${latest.title}` : "No attempts yet"}</p></Card>
+      <div className="grid grid-cols-3 gap-3">
+        <Card className="flex flex-col items-center p-4 text-center sm:p-6">
+          <Clock className="mb-2 h-6 w-6 shrink-0 text-slate-400" />
+          <p className="text-base font-semibold leading-tight sm:text-lg">10Q · 12m</p>
+          <p className="mt-1 text-xs font-semibold text-slate-500 dark:text-slate-400">Quiz Sprints</p>
+        </Card>
+        <Card className="flex flex-col items-center p-4 text-center sm:p-6">
+          <FileQuestion className="mb-2 h-6 w-6 shrink-0 text-slate-400" />
+          <p className="text-base font-semibold leading-tight sm:text-lg">50Q · 100m</p>
+          <p className="mt-1 text-xs font-semibold text-slate-500 dark:text-slate-400">Mock Exams</p>
+        </Card>
+        <Card className="flex flex-col items-center p-4 text-center sm:p-6">
+          <BarChart3 className="mb-2 h-6 w-6 shrink-0 text-slate-400" />
+          <p className="text-base font-semibold leading-tight sm:text-lg">{latest ? `${latest.percentage}%` : "—"}</p>
+          <p className="mt-1 w-full truncate text-xs font-semibold text-slate-500 dark:text-slate-400">{latest ? latest.title : "Latest"}</p>
+        </Card>
       </div>
 
       <Card>
@@ -44,7 +56,7 @@ export function KnowledgeCheck() {
                   <h3 className="text-base font-semibold">{quiz.title}</h3>
                   <p className="mt-1 text-sm font-medium text-slate-500 dark:text-slate-400">{quiz.focusTags.join(" · ")}</p>
                 </div>
-                <Button asChild size="sm" variant="hero"><Link to={`/arena?cert=${cert}&mode=quiz&count=10&minutes=12&quizId=${quiz.id}&domain=${encodeURIComponent(quiz.domain)}&tags=${encodeURIComponent(quiz.focusTags.join(","))}&examTitle=${encodeURIComponent(`${cert} ${quiz.title}`)}`}><Play className="h-4 w-4" /> Start</Link></Button>
+                <Button asChild size="sm" variant="hero" className="shrink-0"><Link to={`/arena?cert=${cert}&mode=quiz&count=10&minutes=12&quizId=${quiz.id}&domain=${encodeURIComponent(quiz.domain)}&tags=${encodeURIComponent(quiz.focusTags.join(","))}&examTitle=${encodeURIComponent(`${cert} ${quiz.title}`)}`}><Play className="h-4 w-4" /> Start</Link></Button>
               </div>
             </div>
           ))}
@@ -60,11 +72,11 @@ export function KnowledgeCheck() {
               <div key={exam.id} className="rounded-xl border border-slate-200 bg-white p-4 dark:border-white/10 dark:bg-white/5">
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <Badge className="mb-2 bg-emerald-900 text-white dark:bg-emerald-300 dark:text-emerald-950">{exam.title}</Badge>
+                    <Badge className="mb-2 bg-blue-900 text-white dark:bg-blue-300 dark:text-blue-950">{exam.title}</Badge>
                     <h3 className="text-base font-semibold">Weighted structure changes every launch</h3>
                     <p className="mt-1 text-sm font-medium text-slate-500 dark:text-slate-400">50 questions · 100 minutes · unanswered grade wrong</p>
                   </div>
-                  <Button asChild size="sm" variant="hero"><Link to={`/arena?cert=${cert}&mode=timed&count=50&minutes=100&examId=${exam.id}&examTitle=${encodeURIComponent(exam.title)}`}><Play className="h-4 w-4" /> Start</Link></Button>
+                  <Button asChild size="sm" variant="hero" className="shrink-0"><Link to={`/arena?cert=${cert}&mode=timed&count=50&minutes=100&examId=${exam.id}&examTitle=${encodeURIComponent(exam.title)}`}><Play className="h-4 w-4" /> Start</Link></Button>
                 </div>
                 <div className="mt-3"><Progress value={best?.percentage ?? 0} /><p className="mt-1 text-xs font-semibold text-slate-500 dark:text-slate-400">Best: {best ? `${best.percentage}%` : "Not attempted"}</p></div>
               </div>

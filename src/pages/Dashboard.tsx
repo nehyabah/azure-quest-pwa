@@ -23,31 +23,31 @@ export function Dashboard() {
   return (
     <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} className="space-y-5">
       <section className="overflow-hidden rounded-[2rem] bg-slate-950 p-5 text-white shadow-card dark:bg-white dark:text-slate-950">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <Badge className="bg-amber-300 text-slate-950">Exam readiness system</Badge>
-            <h1 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl">Train by readiness, not points.</h1>
+            <h1 className="mt-3 text-3xl font-black tracking-tight sm:text-5xl">Train by readiness, not points.</h1>
             <p className="mt-2 max-w-xl text-sm font-bold opacity-75">Weighted mocks, 12-minute sprints, case files, KQL Gym, Learn tracking, and real history analytics.</p>
           </div>
-          <motion.div animate={{ rotate: [0, -2, 2, 0] }} transition={{ repeat: Infinity, duration: 3 }} className="grid h-28 w-28 place-items-center rounded-[2rem] bg-gradient-to-br from-sky-300 to-violet-500 text-3xl font-black shadow-glow">AQ</motion.div>
+          <motion.div animate={{ rotate: [0, -2, 2, 0] }} transition={{ repeat: Infinity, duration: 3 }} className="grid h-20 w-20 shrink-0 place-items-center rounded-[2rem] bg-gradient-to-br from-sky-300 to-violet-500 text-2xl font-black shadow-glow sm:h-28 sm:w-28 sm:text-3xl">AQ</motion.div>
         </div>
       </section>
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
         <StatCard emoji="STR" label="Streak" value={`${progress.streak} days`} hint="Current streak" />
         <StatCard emoji="TOD" label="Today" value={`${progress.completedToday}/${progress.dailyGoal}`} hint="Daily questions" />
         {reports.map(r => <StatCard key={r.cert} emoji={r.cert.split("-")[1]} label={`${r.cert} Ready`} value={`${r.readiness}%`} hint={r.status} />)}
       </div>
 
       <Card>
-        <CardHeader><div><CardTitle>Readiness command</CardTitle><p className="text-sm font-bold text-slate-500 dark:text-slate-400">Your study plan is based on readiness evidence.</p></div><Gauge className="h-6 w-6 text-emerald-500" /></CardHeader>
+        <CardHeader><div><CardTitle>Readiness command</CardTitle><p className="text-sm font-bold text-slate-500 dark:text-slate-400">Your study plan is based on readiness evidence.</p></div><Gauge className="h-6 w-6 text-blue-500" /></CardHeader>
         <div className="grid gap-3 md:grid-cols-3">
           {reports.map(r => <Link key={r.cert} to="/readiness" className="rounded-2xl bg-slate-100 p-4 dark:bg-white/10"><div className="mb-2 flex justify-between font-black"><span>{r.cert}</span><span>{r.readiness}%</span></div><Progress value={r.readiness}/><p className="mt-2 text-xs font-bold text-slate-500 dark:text-slate-400">{r.recommendation}</p></Link>)}
         </div>
       </Card>
 
       <Card>
-        <CardHeader><div><CardTitle>Daily goal</CardTitle><p className="text-sm font-bold text-slate-500 dark:text-slate-400">{progress.completedToday}/{progress.dailyGoal} questions today</p></div><Badge className="bg-emerald-400 text-slate-950">Focus</Badge></CardHeader>
+        <CardHeader><div><CardTitle>Daily goal</CardTitle><p className="text-sm font-bold text-slate-500 dark:text-slate-400">{progress.completedToday}/{progress.dailyGoal} questions today</p></div><Badge className="bg-blue-400 text-slate-950">Focus</Badge></CardHeader>
         <Progress value={dailyPct} />
       </Card>
 
@@ -63,11 +63,11 @@ export function Dashboard() {
         </div></CardContent></Card>
       </section>
 
-      <section className="grid gap-3 sm:grid-cols-4">
-        <Button asChild size="lg" variant="hero" className="h-20 justify-between"><Link to="/readiness"><span>Readiness</span><Target /></Link></Button>
-        <Button asChild size="lg" variant="soft" className="h-20 justify-between"><Link to="/cases"><span>Case Files</span><BriefcaseBusiness /></Link></Button>
-        <Button asChild size="lg" variant="soft" className="h-20 justify-between"><Link to="/kql"><span>KQL Gym</span><Code2 /></Link></Button>
-        <Button asChild size="lg" variant="soft" className="h-20 justify-between"><Link to="/learn"><span>Learn Tracker</span><BookOpenCheck /></Link></Button>
+      <section className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <Button asChild size="lg" variant="hero" className="h-16 justify-between sm:h-20"><Link to="/readiness"><span>Readiness</span><Target className="shrink-0" /></Link></Button>
+        <Button asChild size="lg" variant="soft" className="h-16 justify-between sm:h-20"><Link to="/cases"><span>Case Files</span><BriefcaseBusiness className="shrink-0" /></Link></Button>
+        <Button asChild size="lg" variant="soft" className="h-16 justify-between sm:h-20"><Link to="/kql"><span>KQL Gym</span><Code2 className="shrink-0" /></Link></Button>
+        <Button asChild size="lg" variant="soft" className="h-16 justify-between sm:h-20"><Link to="/learn"><span>Learn Tracker</span><BookOpenCheck className="shrink-0" /></Link></Button>
       </section>
 
       <Card><CardHeader><div><CardTitle>Quiz Sprints</CardTitle><p className="text-sm font-bold text-slate-500 dark:text-slate-400">10 questions · 12 minutes · focused skill.</p></div><BookOpenCheck className="h-6 w-6 text-sky-500" /></CardHeader><div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -78,7 +78,7 @@ export function Dashboard() {
 
       <Card><CardHeader><CardTitle>Mock exam menu</CardTitle><Trophy className="h-6 w-6 text-amber-500" /></CardHeader><div className="grid gap-3 sm:grid-cols-2">{examBlueprints.map((exam) => <Link key={exam.id} to={`/arena?cert=${exam.cert}&mode=timed&count=${exam.targetQuestions}&minutes=${exam.minutes}&examId=${exam.id}&examTitle=${encodeURIComponent(exam.title)}${exam.focusDomain ? `&domain=${encodeURIComponent(exam.focusDomain)}` : ""}`} className="rounded-2xl bg-slate-100 p-4 transition hover:scale-[1.01] hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15"><p className="font-black">{exam.title}</p><p className="text-sm font-black text-slate-700 dark:text-slate-200">{exam.subtitle}</p><p className="text-sm font-bold text-slate-500 dark:text-slate-400">{exam.targetQuestions}Q · {exam.minutes}m · {exam.vibe}</p></Link>)}</div></Card>
 
-      <section className="grid gap-4 sm:grid-cols-2"><Card><CardHeader><div><CardTitle>Weak areas</CardTitle><p className="text-sm font-bold text-slate-500 dark:text-slate-400">Review these first.</p></div><Brain className="h-7 w-7 text-violet-500" /></CardHeader><CardContent>{weakTags.length ? <div className="grid gap-2">{weakTags.map(([tag, score]) => <div key={tag} className="flex items-center justify-between rounded-2xl bg-slate-100 p-3 font-black dark:bg-white/10"><span>{tag}</span><span>{score}</span></div>)}</div> : <div className="rounded-2xl bg-emerald-100 p-4 font-black text-emerald-900 dark:bg-emerald-500/20 dark:text-emerald-200">No weak spots yet. Start a practice run to build your map.</div>}</CardContent></Card><Card><CardHeader><CardTitle>Latest run</CardTitle><Badge>{attempts[0]?.percentage ?? 0}%</Badge></CardHeader><p className="font-bold text-slate-600 dark:text-slate-300">{attempts[0] ? `${attempts[0].title} · ${attempts[0].score}/${attempts[0].total} · +${attempts[0].readinessDelta ?? 0} readiness` : "No saved attempts yet."}</p></Card></section>
+      <section className="grid gap-4 sm:grid-cols-2"><Card><CardHeader><div><CardTitle>Weak areas</CardTitle><p className="text-sm font-bold text-slate-500 dark:text-slate-400">Review these first.</p></div><Brain className="h-7 w-7 text-violet-500" /></CardHeader><CardContent>{weakTags.length ? <div className="grid gap-2">{weakTags.map(([tag, score]) => <div key={tag} className="flex items-center justify-between rounded-2xl bg-slate-100 p-3 font-black dark:bg-white/10"><span>{tag}</span><span>{score}</span></div>)}</div> : <div className="rounded-2xl bg-blue-100 p-4 font-black text-blue-900 dark:bg-blue-500/20 dark:text-blue-200">No weak spots yet. Start a practice run to build your map.</div>}</CardContent></Card><Card><CardHeader><CardTitle>Latest run</CardTitle><Badge>{attempts[0]?.percentage ?? 0}%</Badge></CardHeader><p className="font-bold text-slate-600 dark:text-slate-300">{attempts[0] ? `${attempts[0].title} · ${attempts[0].score}/${attempts[0].total} · +${attempts[0].readinessDelta ?? 0} readiness` : "No saved attempts yet."}</p></Card></section>
     </motion.div>
   );
 }

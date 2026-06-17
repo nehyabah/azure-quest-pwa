@@ -60,13 +60,13 @@ export function JobReadiness() {
     <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} className="space-y-5">
       <section className="luxury-panel overflow-hidden rounded-[2rem] p-5 text-white shadow-card sm:p-6">
         <Badge className="mb-3 bg-white/15 text-white">{cert} Job Readiness</Badge>
-        <h1 className="max-w-4xl text-3xl font-black leading-[1] sm:text-5xl">Interview simulator + project storytelling engine.</h1>
-        <p className="mt-3 max-w-3xl text-base font-bold text-white/75">Practice a 30-minute IAM, Security Engineer, SOC, or Cloud SOC interview. Then map your projects to the strongest answer, pitch, STAR story, architecture talk-through, and follow-up traps.</p>
-        <div className="mt-5 grid gap-3 sm:grid-cols-4">
-          <div className="rounded-[1.25rem] bg-white/10 p-4"><Mic className="mb-2 h-5 w-5" /><p className="font-black">30-min simulator</p></div>
-          <div className="rounded-[1.25rem] bg-white/10 p-4"><Network className="mb-2 h-5 w-5" /><p className="font-black">Project mapper</p></div>
-          <div className="rounded-[1.25rem] bg-white/10 p-4"><FileText className="mb-2 h-5 w-5" /><p className="font-black">STAR builder</p></div>
-          <div className="rounded-[1.25rem] bg-white/10 p-4"><ShieldCheck className="mb-2 h-5 w-5" /><p className="font-black">Follow-up traps</p></div>
+        <h1 className="max-w-4xl text-2xl font-black leading-tight sm:text-5xl">Interview simulator + project storytelling engine.</h1>
+        <p className="mt-3 max-w-3xl text-sm font-bold text-white/75 sm:text-base">Practice a 30-minute IAM, Security Engineer, SOC, or Cloud SOC interview. Then map your projects to the strongest answer, pitch, STAR story, architecture talk-through, and follow-up traps.</p>
+        <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="rounded-[1.25rem] bg-white/10 p-4"><Mic className="mb-2 h-5 w-5" /><p className="text-sm font-black">30-min simulator</p></div>
+          <div className="rounded-[1.25rem] bg-white/10 p-4"><Network className="mb-2 h-5 w-5" /><p className="text-sm font-black">Project mapper</p></div>
+          <div className="rounded-[1.25rem] bg-white/10 p-4"><FileText className="mb-2 h-5 w-5" /><p className="text-sm font-black">STAR builder</p></div>
+          <div className="rounded-[1.25rem] bg-white/10 p-4"><ShieldCheck className="mb-2 h-5 w-5" /><p className="text-sm font-black">Follow-up traps</p></div>
         </div>
       </section>
 
@@ -118,7 +118,7 @@ export function JobReadiness() {
                 <div className="rounded-2xl bg-white p-4 dark:bg-white/10"><p className="text-xs font-black uppercase text-slate-500 dark:text-slate-400">What they are testing</p><p className="mt-1 font-bold">{activeQuestion.testing}</p></div>
                 <div className="grid gap-2 sm:grid-cols-2">
                   {activeQuestion.scoreRubric.map((item) => (
-                    <button key={item} onClick={() => setChecked((prev) => ({ ...prev, [item]: !prev[item] }))} className={`flex items-center gap-2 rounded-xl p-3 text-left text-sm font-black ${checked[item] ? "bg-emerald-500 text-white" : "bg-white dark:bg-white/10"}`}><CheckCircle2 className="h-4 w-4" /> {item}</button>
+                    <button key={item} onClick={() => setChecked((prev) => ({ ...prev, [item]: !prev[item] }))} className={`flex items-center gap-2 rounded-xl p-3 text-left text-sm font-black ${checked[item] ? "bg-blue-500 text-white" : "bg-white dark:bg-white/10"}`}><CheckCircle2 className="h-4 w-4" /> {item}</button>
                   ))}
                 </div>
                 <div className="grid gap-2 sm:grid-cols-2">
@@ -187,8 +187,8 @@ export function JobReadiness() {
 function CoachAnswer({ question }: { question: InterviewQuestion }) {
   const project = projectStories.find((p) => p.id === question.bestProjects[0]);
   return <div className="space-y-3 rounded-[1.25rem] bg-white p-4 shadow-sm dark:bg-white/10">
-    <div className="rounded-2xl bg-emerald-50 p-4 text-emerald-950 dark:bg-emerald-500/15 dark:text-emerald-50"><p className="text-xs font-black uppercase opacity-70">Say this</p><p className="mt-1 font-black leading-relaxed">{question.sayThis}</p></div>
-    <div><p className="mb-2 text-xs font-black uppercase text-slate-500 dark:text-slate-400">Answer structure</p><div className="grid gap-2">{question.answerStructure.map((i) => <div key={i} className="flex items-center gap-2 rounded-xl bg-slate-100 p-3 text-sm font-black dark:bg-slate-950/50"><CheckCircle2 className="h-4 w-4 text-emerald-500" /> {i}</div>)}</div></div>
+    <div className="rounded-2xl bg-blue-50 p-4 text-blue-950 dark:bg-blue-500/15 dark:text-blue-50"><p className="text-xs font-black uppercase opacity-70">Say this</p><p className="mt-1 font-black leading-relaxed">{question.sayThis}</p></div>
+    <div><p className="mb-2 text-xs font-black uppercase text-slate-500 dark:text-slate-400">Answer structure</p><div className="grid gap-2">{question.answerStructure.map((i) => <div key={i} className="flex items-center gap-2 rounded-xl bg-slate-100 p-3 text-sm font-black dark:bg-slate-950/50"><CheckCircle2 className="h-4 w-4 text-blue-500" /> {i}</div>)}</div></div>
     <div className="grid gap-3 sm:grid-cols-2"><div><p className="mb-2 text-xs font-black uppercase text-slate-500 dark:text-slate-400">Follow-up traps</p>{question.followUps.map((i) => <p key={i} className="mb-2 rounded-xl bg-amber-50 p-3 text-sm font-bold text-amber-950 dark:bg-amber-500/15 dark:text-amber-50">{i}</p>)}</div><div><p className="mb-2 text-xs font-black uppercase text-slate-500 dark:text-slate-400">Avoid saying</p>{question.avoid.map((i) => <p key={i} className="mb-2 rounded-xl bg-rose-50 p-3 text-sm font-bold text-rose-950 dark:bg-rose-500/15 dark:text-rose-50">{i}</p>)}</div></div>
     {project ? <div className="rounded-2xl bg-slate-950 p-4 text-white dark:bg-white dark:text-slate-950"><p className="text-xs font-black uppercase opacity-70">Best project to mention</p><h3 className="mt-1 text-lg font-black">{project.title}</h3><p className="mt-2 text-sm font-bold opacity-80">{project.thirtySecond}</p></div> : null}
   </div>;

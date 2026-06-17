@@ -15,7 +15,7 @@ export function CaseFiles() {
       <div className="grid gap-4 md:grid-cols-2">
         {caseFiles.map(file => (
           <Card key={file.id} className="overflow-hidden">
-            <CardHeader><div><div className="flex flex-wrap gap-2"><Badge>{file.cert}</Badge><Badge className="bg-violet-500 text-white">{file.org}</Badge></div><CardTitle className="mt-3 text-2xl">{file.title}</CardTitle></div><ShieldCheck className="h-6 w-6 text-emerald-500" /></CardHeader>
+            <CardHeader><div><div className="flex flex-wrap gap-2"><Badge>{file.cert}</Badge><Badge className="bg-violet-500 text-white">{file.org}</Badge></div><CardTitle className="mt-3 text-2xl">{file.title}</CardTitle></div><ShieldCheck className="h-6 w-6 text-blue-500" /></CardHeader>
             <CardContent>
               <p className="font-bold text-slate-600 dark:text-slate-300">{file.summary}</p>
               <pre className="mt-4 whitespace-pre-wrap rounded-2xl bg-slate-950 p-4 text-xs font-bold text-sky-100 dark:bg-black/40">{file.architecture}</pre>

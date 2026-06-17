@@ -46,7 +46,7 @@ export function ScenarioPlayer() {
           <Card key={step}>
             <CardHeader>
               <Badge className="bg-slate-950 text-white dark:bg-white dark:text-slate-950">Step {index + 1}</Badge>
-              <CheckCircle2 className="h-6 w-6 text-emerald-500" />
+              <CheckCircle2 className="h-6 w-6 text-blue-500" />
             </CardHeader>
             <CardContent>
               <p className="text-lg font-black">{step}</p>

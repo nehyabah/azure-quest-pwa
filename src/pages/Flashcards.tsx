@@ -38,13 +38,13 @@ export function Flashcards() {
     <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
       <div className="flex items-center justify-between">
         <Button asChild variant="ghost" size="sm"><Link to="/"><ArrowLeft className="h-4 w-4" /> Home</Link></Button>
-        <Badge className="bg-emerald-400 text-slate-950">{dueCards.length} due</Badge>
+        <Badge className="bg-blue-400 text-slate-950">{dueCards.length} due</Badge>
       </div>
 
       <Card className="bg-gradient-to-br from-violet-500 to-sky-500 text-white">
         <CardHeader>
           <div>
-            <CardTitle className="text-3xl">Swipe Cards</CardTitle>
+            <CardTitle className="text-2xl sm:text-3xl">Swipe Cards</CardTitle>
             <p className="font-bold opacity-85">Swipe left for review. Swipe right for confident recall.</p>
           </div>
           <div className="text-right"><Brain className="ml-auto h-9 w-9" /><p className="mt-2 rounded-full bg-white/20 px-3 py-1 text-sm font-black">Combo x{combo}</p></div>
@@ -61,7 +61,7 @@ export function Flashcards() {
           <div className="mb-4 grid grid-cols-3 gap-2 text-center">
             <div className="rounded-2xl bg-rose-100 p-3 font-black text-rose-900 dark:bg-rose-500/20 dark:text-rose-100">Hard</div>
             <div className="rounded-2xl bg-amber-100 p-3 font-black text-amber-900 dark:bg-amber-500/20 dark:text-amber-100"><Flame className="mx-auto h-5 w-5" /> x{combo}</div>
-            <div className="rounded-2xl bg-emerald-100 p-3 font-black text-emerald-900 dark:bg-emerald-500/20 dark:text-emerald-100">Easy</div>
+            <div className="rounded-2xl bg-blue-100 p-3 font-black text-blue-900 dark:bg-blue-500/20 dark:text-blue-100">Easy</div>
           </div>
           <motion.div
             key={card.id + String(flipped)}
@@ -69,7 +69,7 @@ export function Flashcards() {
             dragConstraints={{ left: 0, right: 0 }}
             onDragEnd={onDragEnd}
             whileDrag={{ rotate: 4, scale: 1.02 }}
-            className="relative min-h-[460px] cursor-grab overflow-hidden rounded-[2rem] bg-white p-6 shadow-card ring-4 ring-transparent active:cursor-grabbing dark:bg-slate-900"
+            className="relative min-h-[340px] cursor-grab overflow-hidden rounded-[2rem] bg-white p-5 shadow-card ring-4 ring-transparent active:cursor-grabbing dark:bg-slate-900 sm:min-h-[460px] sm:p-6"
             onClick={() => setFlipped((f) => !f)}
           >
             <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-sky-300/30 blur-2xl" />
@@ -90,17 +90,17 @@ export function Flashcards() {
               <div className="relative space-y-4">
                 <p className="text-sm font-black uppercase tracking-wide text-slate-500 dark:text-slate-400">Correct answer</p>
                 <h2 className="text-3xl font-black">{card.answer}. {card.options.find((o) => o.id === card.answer)?.text}</h2>
-                <p className="rounded-2xl bg-emerald-100 p-4 text-lg font-black text-emerald-900 dark:bg-emerald-500/20 dark:text-emerald-100">{card.explanation}</p>
+                <p className="rounded-2xl bg-blue-100 p-4 text-lg font-black text-blue-900 dark:bg-blue-500/20 dark:text-blue-100">{card.explanation}</p>
                 <div className="flex flex-wrap gap-2">{card.tags.map((tag) => <Badge key={tag} className="bg-slate-200 text-slate-700 dark:bg-white/10 dark:text-white">#{tag}</Badge>)}</div>
               </div>
             )}
           </motion.div>
 
           <div className="mt-5 grid grid-cols-4 gap-2">
-            <Button onClick={() => void rate("hard")} variant="danger" size="lg" className="h-16 flex-col text-xs"><X /> Again</Button>
-            <Button onClick={() => void rate("hard")} variant="soft" size="lg" className="h-16 flex-col text-xs"><Zap /> Shaky</Button>
-            <Button onClick={() => void rate("easy")} variant="success" size="lg" className="h-16 flex-col text-xs"><Check /> Got it</Button>
-            <Button onClick={() => void rate("easy")} variant="hero" size="lg" className="h-16 flex-col text-xs"><Flame /> Mastered</Button>
+            <Button onClick={() => void rate("hard")} variant="danger" size="lg" className="h-14 flex-col text-xs sm:h-16"><X /> Again</Button>
+            <Button onClick={() => void rate("hard")} variant="soft" size="lg" className="h-14 flex-col text-xs sm:h-16"><Zap /> Shaky</Button>
+            <Button onClick={() => void rate("easy")} variant="success" size="lg" className="h-14 flex-col text-xs sm:h-16"><Check /> Got it</Button>
+            <Button onClick={() => void rate("easy")} variant="hero" size="lg" className="h-14 flex-col text-xs sm:h-16"><Flame /> Mastered</Button>
           </div>
         </div>
       )}

@@ -11,7 +11,7 @@ import { Progress } from "../components/ui/progress";
 import type { Cert } from "../types";
 
 function heatTone(pct: number) {
-  if (pct >= 85) return "bg-emerald-500 text-white";
+  if (pct >= 85) return "bg-blue-500 text-white";
   if (pct >= 70) return "bg-sky-500 text-white";
   if (pct >= 55) return "bg-amber-300 text-slate-950";
   return "bg-rose-500 text-white";
@@ -34,13 +34,13 @@ export function Readiness() {
 
     {!selectedCert ? <div className="grid gap-3 sm:grid-cols-3">{(["SC-300", "AZ-500", "SC-500"] as Cert[]).map((c) => <Button key={c} asChild variant="soft"><Link to={`/cert/${c.toLowerCase()}/readiness`}>{c} readiness</Link></Button>)}</div> : null}
 
-    <div className="grid gap-4 md:grid-cols-3">{reports.map(r => <Card key={r.cert} className="border-0 shadow-card"><CardHeader><div><Badge>{r.cert}</Badge><CardTitle className="mt-2 text-3xl">{r.readiness}%</CardTitle><p className="font-black text-slate-500 dark:text-slate-400">{r.status}</p></div><Target className="h-6 w-6 text-emerald-500" /></CardHeader><Progress value={r.readiness}/><CardContent><div className="grid gap-2 text-sm font-black"><p>Mock exam average: {r.examAverage}%</p><p>Quiz average: {r.quizAverage}%</p><p>Consistency: {r.consistency}%</p><p>Timing discipline: {r.timeManagement}%</p><p>Hard-question accuracy: {r.hardAccuracy}%</p><p>Weakest domain: {r.weakestDomain ?? "Run a mock"}</p></div><div className="mt-4 rounded-2xl bg-slate-100 p-3 text-sm font-bold dark:bg-white/10">{r.recommendation}</div><Button asChild className="mt-4 w-full" variant="hero"><Link to={`/arena?cert=${r.cert}&mode=timed&count=50&minutes=100&examTitle=${encodeURIComponent(`${r.cert} Weighted Mock`)}`}>Start weighted mock <ArrowRight className="h-4 w-4" /></Link></Button></CardContent></Card>)}</div>
+    <div className="grid gap-4 md:grid-cols-3">{reports.map(r => <Card key={r.cert} className="border-0 shadow-card"><CardHeader><div><Badge>{r.cert}</Badge><CardTitle className="mt-2 text-3xl">{r.readiness}%</CardTitle><p className="font-black text-slate-500 dark:text-slate-400">{r.status}</p></div><Target className="h-6 w-6 text-blue-500" /></CardHeader><Progress value={r.readiness}/><CardContent><div className="grid gap-2 text-sm font-black"><p>Mock exam average: {r.examAverage}%</p><p>Quiz average: {r.quizAverage}%</p><p>Consistency: {r.consistency}%</p><p>Timing discipline: {r.timeManagement}%</p><p>Hard-question accuracy: {r.hardAccuracy}%</p><p>Weakest domain: {r.weakestDomain ?? "Run a mock"}</p></div><div className="mt-4 rounded-2xl bg-slate-100 p-3 text-sm font-bold dark:bg-white/10">{r.recommendation}</div><Button asChild className="mt-4 w-full" variant="hero"><Link to={`/arena?cert=${r.cert}&mode=timed&count=50&minutes=100&examTitle=${encodeURIComponent(`${r.cert} Weighted Mock`)}`}>Start weighted mock <ArrowRight className="h-4 w-4" /></Link></Button></CardContent></Card>)}</div>
 
     <div className="grid gap-4 lg:grid-cols-[1.2fr_.8fr]">
       <Card>
         <CardHeader><CardTitle>Expanded domain heatmap</CardTitle><Activity className="h-5 w-5 text-sky-500" /></CardHeader>
         <CardContent>
-          {Object.keys(domains).length ? <div className="grid gap-3 sm:grid-cols-2">{Object.entries(domains).map(([domain, s]) => <div key={domain} className={`rounded-[1.25rem] p-4 ${heatTone(s.percentage)}`}><div className="flex justify-between gap-3 text-sm font-black"><span>{domain}</span><span>{s.percentage}%</span></div><div className="mt-3 h-2 overflow-hidden rounded-full bg-white/25"><div className="h-full rounded-full bg-white" style={{ width: `${s.percentage}%` }} /></div><div className="mt-3 grid grid-cols-3 gap-2 text-center text-xs font-black"><div className="rounded-xl bg-white/15 p-2">{s.correct}/{s.total}<br/>score</div><div className="rounded-xl bg-white/15 p-2">{s.total}<br/>seen</div><div className="rounded-xl bg-white/15 p-2">{s.percentage < 70 ? "Drill" : "Hold"}<br/>action</div></div></div>)}</div> : <p className="font-bold text-slate-500">Take a quiz or mock exam to build the heatmap.</p>}
+          {Object.keys(domains).length ? <div className="grid gap-3 sm:grid-cols-2">{Object.entries(domains).map(([domain, s]) => <div key={domain} className={`rounded-[1.25rem] p-4 ${heatTone(s.percentage)}`}><div className="flex justify-between gap-3 text-sm font-black"><span>{domain}</span><span>{s.percentage}%</span></div><div className="mt-3 h-1 overflow-hidden rounded-full bg-white/25 sm:h-2"><div className="h-full rounded-full bg-white" style={{ width: `${s.percentage}%` }} /></div><div className="mt-3 grid grid-cols-3 gap-2 text-center text-xs font-black"><div className="rounded-xl bg-white/15 p-2">{s.correct}/{s.total}<br/>score</div><div className="rounded-xl bg-white/15 p-2">{s.total}<br/>seen</div><div className="rounded-xl bg-white/15 p-2">{s.percentage < 70 ? "Drill" : "Hold"}<br/>action</div></div></div>)}</div> : <p className="font-bold text-slate-500">Take a quiz or mock exam to build the heatmap.</p>}
         </CardContent>
       </Card>
       <Card>
@@ -50,8 +50,40 @@ export function Readiness() {
     </div>
 
     <Card>
-      <CardHeader><CardTitle>Recent performance trend</CardTitle><TrendingUp className="h-5 w-5 text-emerald-500" /></CardHeader>
-      <CardContent>{recent.length ? <div className="grid gap-3">{recent.map((a, idx) => <div key={a.id} className="grid gap-2 rounded-2xl bg-slate-100 p-3 dark:bg-white/10 sm:grid-cols-[1fr_auto]"><div><p className="font-black">{idx + 1}. {a.title}</p><p className="text-xs font-bold text-slate-500 dark:text-slate-400">{a.kind} · {new Date(a.startedAt).toLocaleString()} · {Math.round(a.timeTakenSeconds / 60)} min</p></div><div className={`rounded-xl px-3 py-2 text-sm font-black ${heatTone(a.percentage)}`}>{a.percentage}%</div></div>)}</div> : <p className="font-bold text-slate-500">No attempts yet.</p>}</CardContent>
+      <CardHeader><CardTitle>Recent performance trend</CardTitle><TrendingUp className="h-5 w-5 text-blue-500" /></CardHeader>
+      <CardContent>
+        {recent.length ? (
+          <div className="grid gap-3">
+            {recent.map((a, idx) => {
+              const prev = recent[idx + 1];
+              const delta = prev ? a.percentage - prev.percentage : null;
+              const date = new Date(a.startedAt).toLocaleDateString(undefined, { month: "short", day: "numeric" });
+              const mins = Math.round(a.timeTakenSeconds / 60);
+              return (
+                <div key={a.id} className="space-y-2.5 rounded-2xl bg-slate-100 p-4 dark:bg-white/10">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <div className="mb-1.5 flex flex-wrap items-center gap-2">
+                        <Badge className="capitalize bg-slate-200 text-slate-700 dark:bg-white/10 dark:text-slate-300">{a.kind}</Badge>
+                        <span className="text-xs text-slate-400 dark:text-slate-500">{date} · {mins}m</span>
+                        {delta !== null && (
+                          <span className={`text-xs font-semibold ${delta > 0 ? "text-blue-500" : delta < 0 ? "text-rose-500" : "text-slate-400"}`}>
+                            {delta > 0 ? `↑ +${delta}%` : delta < 0 ? `↓ ${delta}%` : "→ same"}
+                          </span>
+                        )}
+                      </div>
+                      <p className="truncate font-semibold">{a.title}</p>
+                      <p className="mt-0.5 text-xs text-slate-400 dark:text-slate-500">{a.score}/{a.total} correct</p>
+                    </div>
+                    <div className={`shrink-0 rounded-xl px-3 py-1.5 text-sm font-black ${heatTone(a.percentage)}`}>{a.percentage}%</div>
+                  </div>
+                  <Progress value={a.percentage} />
+                </div>
+              );
+            })}
+          </div>
+        ) : <p className="font-bold text-slate-500">No attempts yet.</p>}
+      </CardContent>
     </Card>
 
     {selectedCert && meta ? <div className="grid gap-3 sm:grid-cols-3"><Button asChild variant="hero" size="lg"><Link to={`/cert/${selectedCert.toLowerCase()}/knowledge`}>Practice {selectedCert}</Link></Button><Button asChild variant="soft" size="lg"><Link to={`/cert/${selectedCert.toLowerCase()}/job`}>Interview readiness</Link></Button><Button asChild variant="soft" size="lg"><Link to={`/history?cert=${selectedCert}`}>Past attempts</Link></Button></div> : null}

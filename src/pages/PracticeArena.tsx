@@ -23,8 +23,8 @@ function validMode(value: string | null): ExamMode {
 }
 
 function optionTone(optionId: QuizOption["id"], selected: QuizOption["id"] | null) {
-  if (optionId === selected) return "bg-emerald-900 text-white ring-2 ring-emerald-300 dark:bg-emerald-300 dark:text-emerald-950";
-  return "bg-white text-emerald-950 hover:bg-emerald-50 dark:bg-emerald-950/50 dark:text-emerald-50 dark:hover:bg-emerald-900/70";
+  if (optionId === selected) return "bg-blue-900 text-white ring-2 ring-blue-300 dark:bg-blue-300 dark:text-blue-950";
+  return "bg-white text-blue-950 hover:bg-blue-50 dark:bg-blue-950/50 dark:text-blue-50 dark:hover:bg-blue-900/70";
 }
 
 export function PracticeArena() {
@@ -57,6 +57,10 @@ export function PracticeArena() {
     [cert, mode, count, seedParam, focusDomain, params.toString()]
   );
 
+  const [loading, setLoading] = useState(true);
+  const [loadProgress, setLoadProgress] = useState(0);
+  const [grading, setGrading] = useState(false);
+  const [gradeProgress, setGradeProgress] = useState(0);
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<QuizOption["id"] | null>(null);
   const [selections, setSelections] = useState<Record<string, QuizOption["id"] | null>>({});
@@ -65,6 +69,22 @@ export function PracticeArena() {
   const [elapsed, setElapsed] = useState(0);
   const [finished, setFinished] = useState(false);
   const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    const duration = 1800;
+    const interval = 30;
+    const steps = duration / interval;
+    let step = 0;
+    const timer = window.setInterval(() => {
+      step++;
+      setLoadProgress(Math.min(100, Math.round((step / steps) * 100)));
+      if (step >= steps) {
+        window.clearInterval(timer);
+        setLoading(false);
+      }
+    }, interval);
+    return () => window.clearInterval(timer);
+  }, []);
   const qStart = useRef(Date.now());
   const question = exam.questions[index];
 
@@ -79,7 +99,9 @@ export function PracticeArena() {
 
   useEffect(() => {
     qStart.current = Date.now();
-    setSelected(null);
+    const q = exam.questions[index];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setSelected(q ? (selections[q.id] ?? null) : null);
   }, [index]);
 
   const attempted = Object.keys(selections).length;
@@ -92,6 +114,11 @@ export function PracticeArena() {
     setSelected(optionId);
     setSelections((prev) => ({ ...prev, [question.id]: optionId }));
     setSecondsByQuestion((prev) => ({ ...prev, [question.id]: seconds }));
+  }
+
+  function prev() {
+    if (index === 0) return;
+    setIndex((v) => v - 1);
   }
 
   function next() {
@@ -118,19 +145,109 @@ export function PracticeArena() {
   useEffect(() => {
     if (finished && !saved) {
       setSaved(true);
+      setGrading(true);
+      setGradeProgress(0);
       void recordAttempt(finalAttempt);
-      if (finalAttempt.percentage >= 70 && !settings.reduceAnimations && !settings.lowBandwidth) void confetti({ particleCount: 120, spread: 80, origin: { y: 0.55 } });
+      const duration = 1800;
+      const interval = 30;
+      const steps = duration / interval;
+      let step = 0;
+      const timer = window.setInterval(() => {
+        step++;
+        setGradeProgress(Math.min(100, Math.round((step / steps) * 100)));
+        if (step >= steps) {
+          window.clearInterval(timer);
+          if (finalAttempt.percentage >= 70 && !settings.reduceAnimations && !settings.lowBandwidth) void confetti({ particleCount: 120, spread: 80, origin: { y: 0.55 } });
+          setGrading(false);
+        }
+      }, interval);
     }
   }, [finalAttempt, finished, recordAttempt, saved, settings.reduceAnimations, settings.lowBandwidth]);
+
+  if (loading) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/95 backdrop-blur-md"
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="w-full max-w-sm space-y-6 px-8 text-center"
+        >
+          <div className="space-y-1">
+            <Badge className="mb-4 bg-blue-400/20 text-blue-300">{cert}</Badge>
+            <h2 className="text-2xl font-semibold tracking-tight text-white">{examTitle}</h2>
+            <p className="text-sm text-slate-400">{count} questions · {minutes} min</p>
+          </div>
+
+          <div className="space-y-3">
+            <div className="h-0.5 w-full overflow-hidden rounded-full bg-white/10">
+              <motion.div
+                className="h-full rounded-full bg-blue-400"
+                initial={{ width: "0%" }}
+                animate={{ width: `${loadProgress}%` }}
+                transition={{ ease: "linear", duration: 0.03 }}
+              />
+            </div>
+            <p className="text-xs font-medium tracking-widest text-slate-500 uppercase">
+              {loadProgress < 40 ? "Selecting questions" : loadProgress < 75 ? "Weighting domains" : loadProgress < 95 ? "Preparing your exam" : "Ready"}
+            </p>
+          </div>
+        </motion.div>
+      </motion.div>
+    );
+  }
 
   if (!exam.questions.length) {
     return <Card><CardTitle>No questions found for this run.</CardTitle><p className="mt-2 font-medium text-slate-500">Try a mixed exam or another quiz.</p></Card>;
   }
 
+  if (finished && grading) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/95 backdrop-blur-md"
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="w-full max-w-sm space-y-6 px-8 text-center"
+        >
+          <div className="space-y-1">
+            <Badge className="mb-4 bg-blue-400/20 text-blue-300">{cert}</Badge>
+            <h2 className="text-2xl font-semibold tracking-tight text-white">{examTitle}</h2>
+            <p className="text-sm text-slate-400">{Object.keys(selections).length} of {exam.questions.length} answered</p>
+          </div>
+
+          <div className="space-y-3">
+            <div className="h-0.5 w-full overflow-hidden rounded-full bg-white/10">
+              <motion.div
+                className="h-full rounded-full bg-blue-400"
+                initial={{ width: "0%" }}
+                animate={{ width: `${gradeProgress}%` }}
+                transition={{ ease: "linear", duration: 0.03 }}
+              />
+            </div>
+            <p className="text-xs font-medium tracking-widest text-slate-500 uppercase">
+              {gradeProgress < 35 ? "Scoring your answers" : gradeProgress < 65 ? "Analysing domains" : gradeProgress < 90 ? "Calculating readiness" : "Almost done"}
+            </p>
+          </div>
+        </motion.div>
+      </motion.div>
+    );
+  }
+
   if (finished) {
     return (
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
-        <Card className={finalAttempt.passed ? "bg-emerald-700 text-white" : "bg-slate-950 text-white"}>
+        <Card className={finalAttempt.passed ? "bg-blue-700 text-white" : "bg-slate-950 text-white"}>
           <CardHeader>
             <div>
               <Badge className="bg-white/20 text-white">{finalAttempt.kind.toUpperCase()} COMPLETE</Badge>
@@ -151,7 +268,7 @@ export function PracticeArena() {
         </Card>
 
         <Card>
-          <CardHeader><CardTitle>Domain report</CardTitle><ShieldCheck className="h-6 w-6 text-emerald-500" /></CardHeader>
+          <CardHeader><CardTitle>Domain report</CardTitle><ShieldCheck className="h-6 w-6 text-blue-500" /></CardHeader>
           <div className="grid gap-3">
             {Object.entries(finalAttempt.domains).map(([domain, stats]) => {
               const pct = Math.round((stats.correct / stats.total) * 100);
@@ -174,8 +291,8 @@ export function PracticeArena() {
                   <summary className="cursor-pointer text-sm font-semibold">{i + 1}. {ok ? "Correct" : "Missed"} · {q.domain}</summary>
                   <p className="mt-3 font-semibold">{q.stem}</p>
                   <div className="mt-3 grid gap-2 text-sm font-medium">
-                    <p className={ok ? "text-emerald-600 dark:text-emerald-300" : "text-rose-600 dark:text-rose-300"}>Your answer: {chosen ? `${chosen}. ${chosenText}` : "Unanswered"}</p>
-                    <p className="text-emerald-700 dark:text-emerald-300">Correct answer: {q.answer}. {correctText}</p>
+                    <p className={ok ? "text-blue-600 dark:text-blue-300" : "text-rose-600 dark:text-rose-300"}>Your answer: {chosen ? `${chosen}. ${chosenText}` : "Unanswered"}</p>
+                    <p className="text-blue-700 dark:text-blue-300">Correct answer: {q.answer}. {correctText}</p>
                     <p className="text-slate-600 dark:text-slate-300">{q.explanation}</p>
                     {!ok && chosen && q.whyWrong[chosen] ? <p className="rounded-xl bg-white p-3 dark:bg-black/20">Why your answer missed: {q.whyWrong[chosen]}</p> : null}
                   </div>
@@ -198,17 +315,17 @@ export function PracticeArena() {
     <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} className="space-y-4">
       <div className="flex items-center justify-between gap-3">
         <Button asChild variant="ghost" size="sm"><Link to={`/cert/${cert.toLowerCase()}/knowledge`}><ArrowLeft className="h-4 w-4" /> Knowledge</Link></Button>
-        <div className="flex flex-wrap items-center justify-end gap-2">
-          <Badge>{examTitle}</Badge>
-          {fighter ? <Badge className="bg-slate-950 text-white dark:bg-white dark:text-slate-950">{fighter}</Badge> : null}
-          <Badge className={timeLeft < 60 ? "bg-rose-500 text-white" : "bg-emerald-100 text-emerald-950"}><Clock className="h-3 w-3" /> {formatSeconds(timeLeft)}</Badge>
+        <div className="flex min-w-0 items-center justify-end gap-2">
+          <Badge className="max-w-[140px] truncate sm:max-w-none">{examTitle}</Badge>
+          {fighter ? <Badge className="hidden bg-slate-950 text-white dark:bg-white dark:text-slate-950 sm:inline-flex">{fighter}</Badge> : null}
+          <Badge className={`shrink-0 ${timeLeft < 60 ? "bg-rose-500 text-white" : "bg-blue-100 text-blue-950"}`}><Clock className="h-3 w-3" /> {formatSeconds(timeLeft)}</Badge>
         </div>
       </div>
 
       <Card className="overflow-hidden">
         <CardHeader>
           <div>
-            <Badge className="mb-2 bg-emerald-900 text-white dark:bg-emerald-300 dark:text-emerald-950">{question.scenarioOrg}</Badge>
+            <Badge className="mb-2 bg-blue-900 text-white dark:bg-blue-300 dark:text-blue-950">{question.scenarioOrg}</Badge>
             <CardTitle className="text-xl">Question {index + 1}/{exam.questions.length}</CardTitle>
             <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{question.domain}</p>
           </div>
@@ -239,9 +356,10 @@ export function PracticeArena() {
         </div>
 
         <div className="sticky bottom-24 z-20 sm:static">
-          <div className="grid gap-2 sm:grid-cols-[1fr_auto]">
-            <Button onClick={next} disabled={!selected} size="lg" variant="hero" className="h-12 w-full text-sm">{index + 1 >= exam.questions.length ? "Finish run" : "Next question"}</Button>
-            <Button onClick={() => setFinished(true)} size="lg" variant="soft" className="h-12 text-sm">Finish now · grade answered</Button>
+          <div className="grid grid-cols-[auto_1fr_auto] gap-2">
+            <Button onClick={prev} disabled={index === 0} size="lg" variant="soft" className="h-12 px-4"><ArrowLeft className="h-4 w-4" /></Button>
+            <Button onClick={next} disabled={!selected} size="lg" variant="hero" className="h-12 text-sm">{index + 1 >= exam.questions.length ? "Finish run" : "Next question"}</Button>
+            <Button onClick={() => setFinished(true)} size="lg" variant="soft" className="h-12 text-sm"><span className="hidden sm:inline">Grade now</span><span className="sm:hidden">Grade</span></Button>
           </div>
         </div>
       </motion.div>

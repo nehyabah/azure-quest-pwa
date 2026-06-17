@@ -42,10 +42,10 @@ export function StudyMode() {
             </div>
 
             {eli5 ? (
-              <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="rounded-[1.5rem] bg-emerald-100 p-5 text-emerald-950 dark:bg-emerald-500/20 dark:text-emerald-100">
+              <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="rounded-[1.5rem] bg-blue-100 p-5 text-blue-950 dark:bg-blue-500/20 dark:text-blue-100">
                 <p className="mb-1 flex items-center gap-2 text-xs font-black uppercase tracking-wide"><Baby className="h-4 w-4" /> Explain like I’m 5</p>
                 <p className="text-xl font-black">{concept.eli5}</p>
-                <div className="mt-4 rounded-2xl bg-white/70 p-4 text-slate-800 dark:bg-black/20 dark:text-emerald-50">
+                <div className="mt-4 rounded-2xl bg-white/70 p-4 text-slate-800 dark:bg-black/20 dark:text-blue-50">
                   <p className="text-xs font-black uppercase tracking-wide opacity-70">Real-life concept</p>
                   <p className="mt-1 text-lg font-black">{concept.realLife}</p>
                 </div>

@@ -54,7 +54,7 @@ export function Settings() {
           <Button onClick={() => void downloadExport()} variant="hero" size="lg"><Download className="h-5 w-5" /> Export progress</Button>
           <Button onClick={() => void resetLocalData()} variant="danger" size="lg"><Trash2 className="h-5 w-5" /> Reset local data</Button>
         </div>
-        {exported ? <p className="mt-3 rounded-2xl bg-emerald-100 p-3 font-black text-emerald-900 dark:bg-emerald-500/20 dark:text-emerald-100">Export downloaded</p> : null}
+        {exported ? <p className="mt-3 rounded-2xl bg-blue-100 p-3 font-black text-blue-900 dark:bg-blue-500/20 dark:text-blue-100">Export downloaded</p> : null}
       </Card>
     </motion.div>
   );

@@ -50,7 +50,7 @@ export function KqlGym() {
             const picked = selected[current.id] === o.id;
             const answered = selected[current.id];
             const right = o.id === current.answer;
-            const tone = !answered ? "bg-slate-100 dark:bg-white/10" : right ? "bg-emerald-500 text-white" : picked ? "bg-rose-500 text-white" : "bg-slate-100 text-slate-500 dark:bg-white/5";
+            const tone = !answered ? "bg-slate-100 dark:bg-white/10" : right ? "bg-blue-500 text-white" : picked ? "bg-rose-500 text-white" : "bg-slate-100 text-slate-500 dark:bg-white/5";
             return <button key={o.id} onClick={() => setSelected(prev => ({...prev,[current.id]: o.id}))} className={`rounded-2xl p-4 text-left font-black ${tone}`}><span className="mr-3 rounded-xl bg-black/10 px-3 py-2">{o.id}</span>{o.text}</button>;
           })}</div>
           {selected[current.id] ? <div className="mt-4 rounded-2xl bg-slate-100 p-4 font-bold dark:bg-white/10">{current.explanation}</div> : null}

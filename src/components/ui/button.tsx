@@ -4,16 +4,16 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-semibold tracking-tight transition active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-semibold tracking-tight transition active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
   {
     variants: {
       variant: {
-        default: "bg-emerald-900 text-white shadow-sm hover:bg-emerald-800 dark:bg-emerald-500 dark:text-emerald-950 dark:hover:bg-emerald-400",
-        hero: "bg-emerald-800 text-white shadow-sm hover:bg-emerald-700 dark:bg-emerald-400 dark:text-emerald-950 dark:hover:bg-emerald-300",
-        success: "bg-emerald-600 text-white hover:bg-emerald-700",
+        default: "bg-blue-900 text-white shadow-sm hover:bg-blue-800 dark:bg-blue-500 dark:text-blue-950 dark:hover:bg-blue-400",
+        hero: "bg-blue-800 text-white shadow-sm hover:bg-blue-700 dark:bg-blue-400 dark:text-blue-950 dark:hover:bg-blue-300",
+        success: "bg-blue-600 text-white hover:bg-blue-700",
         danger: "bg-rose-500 text-white hover:bg-rose-600",
-        ghost: "bg-transparent hover:bg-emerald-50 dark:hover:bg-emerald-400/10",
-        soft: "border border-emerald-900/15 bg-white text-emerald-950 shadow-sm hover:bg-emerald-50 dark:border-emerald-300/15 dark:bg-emerald-950/40 dark:text-emerald-50 dark:hover:bg-emerald-900/60"
+        ghost: "bg-transparent hover:bg-blue-50 dark:hover:bg-blue-400/10",
+        soft: "border border-blue-200 bg-blue-50 text-blue-800 shadow-sm hover:bg-blue-100 dark:border-blue-800/60 dark:bg-blue-900/30 dark:text-blue-200 dark:hover:bg-blue-900/50"
       },
       size: {
         default: "h-10 px-4 py-2",

@@ -11,8 +11,8 @@ const config: Config = {
         "2xl": "1.5rem"
       },
       boxShadow: {
-        glow: "0 0 28px rgba(5,150,105,0.22)",
-        card: "0 18px 44px rgba(6,78,59,0.14)"
+        glow: "0 0 28px rgba(37,99,235,0.28)",
+        card: "0 18px 44px rgba(30,64,175,0.14)"
       },
       keyframes: {
         float: {
