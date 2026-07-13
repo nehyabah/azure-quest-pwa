@@ -2,6 +2,18 @@
 
 ## Milestone order
 
+## Subagent collaboration harness
+
+For milestone work that affects product quality, use the three-role harness:
+
+- UI/UX Revamp Lead: visual polish, information architecture, accessibility, interaction quality.
+- Senior Software Engineer: implementation quality, architecture, state flow, performance, maintainability.
+- QA and Product Lead: acceptance criteria, user journeys, prioritization, release risk.
+
+Role briefs live in `docs/agents/`.
+
+Subagents are advisory by default. The main agent integrates recommendations and keeps work inside the currently approved milestone.
+
 ## M0 - Vercel migration + harness reset
 
 Goal:

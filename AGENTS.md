@@ -58,6 +58,42 @@ When files conflict, trust them in this order:
 
 If code conflicts with source-of-truth docs, update the code or report the mismatch.
 
+## Subagent operating model
+
+Azure Quest uses three named subagent roles for meaningful product work. They are advisory by default unless the user explicitly asks for implementation delegation.
+
+Use subagents when the work affects multiple surfaces, changes user experience, changes core exam behavior, or prepares a milestone handoff.
+
+Required subagents:
+
+1. UI/UX Revamp Lead
+2. Senior Software Engineer
+3. QA and Product Lead
+
+Authoritative role briefs live in:
+
+- `docs/agents/ui-ux-revamp-lead.md`
+- `docs/agents/senior-software-engineer.md`
+- `docs/agents/qa-product-lead.md`
+
+Coordination rules:
+
+- The main agent owns final decisions, integration, and source-of-truth updates.
+- Subagents must not override AGENTS.md, PRODUCT_SPEC.md, SECURITY.md, or ACCEPTANCE_CRITERIA.md.
+- Subagents must not start future milestones without explicit approval.
+- Subagents must keep the demo/seed question-bank warning visible.
+- Subagents must preserve the Microsoft non-affiliation disclaimer.
+- Subagents must not add Supabase, GitHub import, LLM calls, source ingestion, or payments unless the matching milestone is approved.
+- If subagents disagree, prefer the option that is safest for learners, easiest to verify, and closest to the current approved milestone.
+
+Default review sequence:
+
+1. UI/UX Revamp Lead reviews visual hierarchy, clarity, trust, navigation, interaction ergonomics, and accessibility.
+2. Senior Software Engineer reviews architecture, state flow, data contracts, tests, build stability, performance, and maintainability.
+3. QA and Product Lead reviews user journeys, acceptance criteria, release risk, prioritization, and product coherence.
+
+Every subagent-backed run should update `CURRENT_STATE.md`, `KNOWN_FAILURES.md`, and the relevant `docs/reports/*` file with the result.
+
 ## Non-negotiable rules
 
 - Do not build outside the currently approved milestone.

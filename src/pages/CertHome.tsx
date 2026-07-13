@@ -7,6 +7,7 @@ import { useAppStore } from "../store/useAppStore";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
 import { Progress } from "../components/ui/progress";
+import { QuestionBankNotice } from "../components/QuestionBankNotice";
 
 const actionCards = [
   { key: "knowledge", title: "Knowledge Check", description: "Quizzes, mock exams, case files, KQL Gym, and past attempts.", icon: HelpCircle },
@@ -42,6 +43,8 @@ export function CertHome() {
           </div>
         </div>
       </section>
+
+      <QuestionBankNotice />
 
       <section className="grid gap-4 sm:grid-cols-3">
         {actionCards.map((card) => {

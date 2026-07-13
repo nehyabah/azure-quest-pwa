@@ -143,6 +143,29 @@ Resolved for local verification. Current dev server is running at `http://localh
 
 ## M1 run failures
 
+### Subagent harness validation
+
+Date:
+2026-07-14
+
+Command:
+`npm run lint`, `npm run build`, `npm run validate:harness`, `npm run validate:questions`, `npm run check:routes`
+
+Error:
+No command failure. Browser visual verification initially used unsupported `networkidle` load-state waiting.
+
+Likely cause:
+The in-app browser automation surface supports `load` for this check, not `networkidle`.
+
+Fix attempted:
+Retried browser verification with supported `load` waiting and captured visual screenshots.
+
+Result:
+All validation commands passed. Browser screenshots were captured with no console errors.
+
+Remaining issue:
+The existing Vite large chunk warning remains; route-level code splitting is still future hardening work.
+
 ### ESLint scanned generated dev PWA output
 
 Date:

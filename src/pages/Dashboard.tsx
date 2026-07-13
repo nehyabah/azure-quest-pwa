@@ -27,7 +27,7 @@ export function Dashboard() {
           <div>
             <Badge className="bg-amber-300 text-slate-950">Exam readiness system</Badge>
             <h1 className="mt-3 text-3xl font-black tracking-tight sm:text-5xl">Train by readiness, not points.</h1>
-            <p className="mt-2 max-w-xl text-sm font-bold opacity-75">Weighted mocks, 12-minute sprints, case files, KQL Gym, Learn tracking, and real history analytics.</p>
+            <p className="mt-2 max-w-xl text-sm font-bold opacity-75">Weighted mocks, 12-minute sprints, case files, KQL Gym, exam readiness, and real history analytics.</p>
           </div>
           <motion.div animate={{ rotate: [0, -2, 2, 0] }} transition={{ repeat: Infinity, duration: 3 }} className="grid h-20 w-20 shrink-0 place-items-center rounded-[2rem] bg-gradient-to-br from-sky-300 to-violet-500 text-2xl font-black shadow-glow sm:h-28 sm:w-28 sm:text-3xl">AQ</motion.div>
         </div>
@@ -67,7 +67,7 @@ export function Dashboard() {
         <Button asChild size="lg" variant="hero" className="h-16 justify-between sm:h-20"><Link to="/readiness"><span>Readiness</span><Target className="shrink-0" /></Link></Button>
         <Button asChild size="lg" variant="soft" className="h-16 justify-between sm:h-20"><Link to="/cases"><span>Case Files</span><BriefcaseBusiness className="shrink-0" /></Link></Button>
         <Button asChild size="lg" variant="soft" className="h-16 justify-between sm:h-20"><Link to="/kql"><span>KQL Gym</span><Code2 className="shrink-0" /></Link></Button>
-        <Button asChild size="lg" variant="soft" className="h-16 justify-between sm:h-20"><Link to="/learn"><span>Learn Tracker</span><BookOpenCheck className="shrink-0" /></Link></Button>
+        <Button asChild size="lg" variant="soft" className="h-16 justify-between sm:h-20"><Link to="/readiness"><span>Exam Readiness</span><BookOpenCheck className="shrink-0" /></Link></Button>
       </section>
 
       <Card><CardHeader><div><CardTitle>Quiz Sprints</CardTitle><p className="text-sm font-bold text-slate-500 dark:text-slate-400">10 questions · 12 minutes · focused skill.</p></div><BookOpenCheck className="h-6 w-6 text-sky-500" /></CardHeader><div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

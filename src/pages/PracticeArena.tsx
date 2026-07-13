@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useCallback, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import confetti from "canvas-confetti";
 import { motion } from "framer-motion";
@@ -71,6 +71,8 @@ export function PracticeArena() {
   const [elapsed, setElapsed] = useState(0);
   const [finished, setFinished] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [savingAttempt, setSavingAttempt] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
   const [flaggedQuestionIds, setFlaggedQuestionIds] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
@@ -162,12 +164,9 @@ export function PracticeArena() {
     return `/arena?${next.toString()}`;
   }
 
-  useEffect(() => {
-    if (finished && !saved) {
-      setSaved(true);
+  const runGradingAnimation = useCallback(() => {
       setGrading(true);
       setGradeProgress(0);
-      void recordAttempt(finalAttempt);
       const duration = 1800;
       const interval = 30;
       const steps = duration / interval;
@@ -181,8 +180,36 @@ export function PracticeArena() {
           setGrading(false);
         }
       }, interval);
+      return timer;
+  }, [finalAttempt.percentage, settings.lowBandwidth, settings.reduceAnimations]);
+
+  useEffect(() => {
+    if (!finished || saved || savingAttempt || saveError) return;
+    let gradingTimer: number | undefined;
+    let cancelled = false;
+
+    async function saveAttempt() {
+      setSavingAttempt(true);
+      try {
+        await recordAttempt(finalAttempt);
+        if (cancelled) return;
+        setSaved(true);
+        gradingTimer = runGradingAnimation();
+      } catch (error) {
+        if (cancelled) return;
+        setSaveError(error instanceof Error ? error.message : "Unable to save this attempt locally.");
+        setGrading(false);
+      } finally {
+        if (!cancelled) setSavingAttempt(false);
+      }
     }
-  }, [finalAttempt, finished, recordAttempt, saved, settings.reduceAnimations, settings.lowBandwidth]);
+
+    void saveAttempt();
+    return () => {
+      cancelled = true;
+      if (gradingTimer) window.clearInterval(gradingTimer);
+    };
+  }, [finalAttempt, finished, recordAttempt, runGradingAnimation, saveError, saved, savingAttempt]);
 
   if (loading) {
     return (
@@ -379,6 +406,16 @@ export function PracticeArena() {
             </div>
           </CardContent>
         </Card>
+
+        {saveError ? (
+          <Card className="border-rose-200 bg-rose-50 text-rose-950 dark:border-rose-500/30 dark:bg-rose-950/30 dark:text-rose-50">
+            <CardHeader>
+              <CardTitle>Attempt not saved yet</CardTitle>
+            </CardHeader>
+            <p className="text-sm font-medium">Your score is shown below, but local progress and history were not updated. {saveError}</p>
+            <Button onClick={() => setSaveError(null)} className="mt-4" variant="soft">Retry save</Button>
+          </Card>
+        ) : null}
 
         <div className="grid gap-3">
           {question.options.map((option) => (

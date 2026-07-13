@@ -7,8 +7,8 @@ import { MICROSOFT_DISCLAIMER } from "./QuestionBankNotice";
 
 const navItems = [
   { to: "/cert/sc-300/knowledge", label: "Exams", icon: BookOpen },
-  { to: "/cert/sc-300/readiness", label: "Ready", icon: Gauge },
-  { to: "/cert/sc-300/job", label: "Job", icon: BriefcaseBusiness },
+  { to: "/cert/sc-300/readiness", label: "Exam Readiness", icon: Gauge },
+  { to: "/cert/sc-300/job", label: "Job Readiness", icon: BriefcaseBusiness },
   { to: "/history?cert=SC-300", label: "History", icon: History },
   { to: "/settings", label: "Settings", icon: Settings }
 ];
@@ -112,7 +112,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 to={item.to}
                 className={({ isActive }) =>
                   cn(
-                    "flex flex-col items-center gap-1 rounded-xl px-2 py-2 text-[0.68rem] font-semibold transition",
+                    "flex min-h-14 flex-col items-center justify-center gap-1 rounded-xl px-1 py-2 text-center text-[0.58rem] font-semibold leading-tight transition",
                     isActive
                       ? "bg-white/80 text-slate-950 shadow-sm backdrop-blur dark:bg-white/15 dark:text-white"
                       : "text-slate-400 dark:text-slate-500"

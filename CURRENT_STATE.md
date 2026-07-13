@@ -39,6 +39,12 @@ It has:
 - History separates Exam attempts, Quiz attempts, and Labs/practice attempts.
 - Browser verification passed on production for exam landing, arena flag/Finish Now, and History separation.
 - Final production redeploy is READY at `https://azure-quest-pwa.vercel.app`.
+- Subagent harness added with UI/UX Revamp Lead, Senior Software Engineer, and QA and Product Lead roles.
+- Initial subagent audit completed and captured in `docs/reports/subagent-audit.md`.
+- Mobile navigation labels now match the approved terms exactly.
+- Cert landing pages now show the demo/seed question-bank warning.
+- Legacy dashboard no longer sends users to stale `/learn`.
+- Attempt persistence now awaits local save and surfaces retryable save errors instead of failing silently.
 
 ## What is demo/static
 
@@ -103,3 +109,5 @@ M1 - Exam engine hardening.
 - LLM-backed project stories, embeddings, source ingestion, and generated questions are blocked until rate limits, content-hash caching, server-side secret handling, budget caps or kill switches, and failure logging exist.
 - Bundle size warning remains: Vite reports the main JS chunk is larger than 500 kB after minification. This is not a build failure, but future M6 work should consider route-level code splitting.
 - First dev-server verification attempt on `127.0.0.1:5173` did not respond and was restarted on `localhost:5174`, where checks passed.
+- Automated M1 E2E tests are still missing.
+- Duplicate validation remains soft by default and does not fail on duplicates yet.

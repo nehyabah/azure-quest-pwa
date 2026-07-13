@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Added a three-subagent harness: UI/UX Revamp Lead, Senior Software Engineer, and QA and Product Lead.
+- Captured initial subagent audit findings in `docs/reports/subagent-audit.md`.
+- Normalized mobile navigation labels to approved M1 wording.
+- Added demo/seed question-bank warning to cert landing pages.
+- Removed stale `/learn` call-to-action from the legacy dashboard.
+- Hardened attempt persistence so local save failures are visible and retryable.
 - Approved and started M1 exam engine hardening.
 - Migrated the app to the connected Vercel account and deployed production at `https://azure-quest-pwa.vercel.app`.
 - Updated primary navigation to Exams, Exam Readiness, Job Readiness, History, and Settings.
