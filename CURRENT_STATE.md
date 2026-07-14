@@ -32,13 +32,14 @@ It has:
 - Local browser verification passed on `http://localhost:5174/` for the home route, `cert/sc-300/knowledge`, and a small `SC-300` arena smoke route.
 - Browser verification found no Vite error overlay and no current-page console errors on the verified `localhost:5174` routes.
 - Production Vercel deployment is live at `https://azure-quest-pwa.vercel.app`.
-- Production deployment ID: `dpl_BhLYNwKJiV6n36pLSHW8yFhQxGGx`.
+- Production deployment ID: `dpl_HHzPuV35C8ctFqh3sKV1ZytszX6p`.
 - M1 primary navigation now uses Exams, Exam Readiness, Job Readiness, History, and Settings.
 - Practice runs show a question flag/report placeholder.
 - Practice runs preserve focus domain, focus tags, quiz ID, exam ID, and seed for retakes.
 - History separates Exam attempts, Quiz attempts, and Labs/practice attempts.
 - Browser verification passed on production for exam landing, arena flag/Finish Now, and History separation.
 - Final production redeploy is READY at `https://azure-quest-pwa.vercel.app`.
+- Latest production deployment URL: `https://azure-quest-nyozsbth6-tonybabalola-1114s-projects.vercel.app`.
 - Subagent harness added with UI/UX Revamp Lead, Senior Software Engineer, and QA and Product Lead roles.
 - Initial subagent audit completed and captured in `docs/reports/subagent-audit.md`.
 - Mobile navigation labels now match the approved terms exactly.
@@ -49,6 +50,7 @@ It has:
 - The M1.5 follow-up audit corrected overly timid visuals with softer Azure borders, system typography, calmer page backgrounds, sharper cards, improved selected states, and low-bandwidth-safe styling.
 - Playful labels such as Daily Boss, Swipe Cards, Cozy cyber cave, Explain Like I'm 5, and Next bite have been replaced with professional wording.
 - Three M1.5 follow-up subagents reviewed UI/UX, senior engineering risk, and QA/product quality; their release-blocking findings were fixed before deployment.
+- M1.5 production verification passed on the fresh deployment URL for Job Readiness and Study Mode; the production alias serves the new asset, but an already-open PWA tab may need refresh because of service worker caching.
 
 ## What is demo/static
 

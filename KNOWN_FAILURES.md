@@ -368,7 +368,7 @@ Fix attempted:
 Applied a stronger Azure-blue system pass, softened borders, removed remote font import, fixed low-bandwidth behavior, reworked Job Readiness/History/Study/Readiness surfaces, added selected-state semantics, and repaired damaged copy.
 
 Result:
-Resolved locally. `npm run lint`, `npm run validate:harness`, `npm run validate:questions`, `npm run check:routes`, and `npm run build` pass.
+Resolved. `npm run lint`, `npm run validate:harness`, `npm run validate:questions`, `npm run check:routes`, and `npm run build` pass. Production deployment `dpl_HHzPuV35C8ctFqh3sKV1ZytszX6p` is READY.
 
 Remaining issue:
-Production deployment still needs to be updated after the local M1.5 correction commit.
+An already-open PWA tab can serve stale cached assets until refreshed, but the production alias network asset points at the new build.
