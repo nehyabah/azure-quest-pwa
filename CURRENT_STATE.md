@@ -44,7 +44,9 @@ It has:
 - Mobile navigation labels now match the approved terms exactly.
 - Cert landing pages now show the demo/seed question-bank warning.
 - Legacy dashboard no longer sends users to stale `/learn`.
-- Attempt persistence now awaits local save and surfaces retryable save errors instead of failing silently.
+- Attempt persistence now awaits local save and surfaces retryable save errors on the results screen instead of failing silently.
+- M1.5 professional Azure-blue visual polish is in progress across shared UI primitives, layout, path selection, cert overview, exam landing, and practice arena.
+- Playful labels such as Daily Boss, Swipe Cards, and Cozy cyber cave have been replaced with professional wording.
 
 ## What is demo/static
 
@@ -99,7 +101,7 @@ Required UI copy or equivalent:
 
 ## Current approved milestone
 
-M1 - Exam engine hardening.
+M1.5 - Exam engine hardening + professional Azure-blue design polish.
 
 ## Current blockers
 

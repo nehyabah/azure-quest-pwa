@@ -13,7 +13,7 @@ This product is not affiliated with or endorsed by Microsoft.
 
 ## Current approved milestone
 
-M1 - Exam engine hardening.
+M1.5 - Exam engine hardening + professional Azure-blue design polish.
 
 The only approved work now:
 
@@ -34,12 +34,13 @@ The only approved work now:
 - Update CURRENT_STATE.md.
 - Update KNOWN_FAILURES.md.
 - Update KNOWN_BLOCKERS.md.
+- Tighten the visual system for active M1 surfaces using Azure blue, professional typography, cleaner borders, restrained cards, and less playful language.
 
 Do not build Supabase yet.
 Do not build GitHub OAuth yet.
 Do not build LLM question generation yet.
 Do not regenerate the question bank yet.
-Do not redesign the whole app.
+Do not start a future product milestone or change core product scope beyond this M1.5 design polish.
 Do not implement future milestones unless explicitly approved.
 
 The roadmap is context only. Complete only the current approved milestone.
@@ -197,15 +198,16 @@ Hosting:
 
 Professional, quiet, premium.
 
-Primary palette:
+Primary palette for M1.5:
 
 - White
-- Dark green
+- Azure blue
 - Neutral greys
 
 Avoid:
 
 - Loud purple
+- Unnecessary decorative glow/blur
 - Cartoon-heavy UI
 - Oversized buttons
 - Overly bold fonts

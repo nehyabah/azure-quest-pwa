@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  font-family: "Aptos", "Neue Haas Grotesk Text", "Inter", "Segoe UI", "SF Pro Text", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Inter", "Aptos", "Segoe UI Variable", "Segoe UI", "SF Pro Text", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   color-scheme: light;
   font-size: 14px;
 }
@@ -18,11 +18,11 @@ body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   text-rendering: geometricPrecision;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 h1, h2, h3, .font-black {
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
 }
 
 .font-black { font-weight: 700 !important; }
@@ -37,12 +37,12 @@ pre {
 .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
 
 .luxury-panel {
-  background-image: linear-gradient(135deg, #1e3a8a, #0f172a), radial-gradient(circle at top right, rgba(59,130,246,.18), transparent 34%);
+  background: linear-gradient(135deg, #003b73, #0f172a);
 }
 
 .pro-panel {
-  background: linear-gradient(135deg, #ffffff, #eff6ff 58%, #dbeafe);
+  background: linear-gradient(135deg, #ffffff, #f8fbff 62%, #eaf3ff);
 }
 .dark .pro-panel {
-  background: linear-gradient(135deg, #0a0f1e, #0f2040 58%, #1e3a8a);
+  background: linear-gradient(135deg, #07111f, #0b2545 62%, #003b73);
 }

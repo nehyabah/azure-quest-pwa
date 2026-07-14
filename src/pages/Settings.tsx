@@ -39,7 +39,7 @@ export function Settings() {
           <Wand2 className="h-8 w-8 text-violet-500" />
         </CardHeader>
         <CardContent>
-          <SettingRow icon={<Moon />} title="Dark mode" hint="Cozy cyber cave" checked={settings.darkMode} onChange={(v) => void setSettings({ darkMode: v })} />
+          <SettingRow icon={<Moon />} title="Dark mode" hint="Reduce glare for long study sessions" checked={settings.darkMode} onChange={(v) => void setSettings({ darkMode: v })} />
           <SettingRow icon={<Wand2 />} title="Reduce animations" hint="Less motion, same readiness" checked={settings.reduceAnimations} onChange={(v) => void setSettings({ reduceAnimations: v })} />
           <SettingRow icon={<WifiOff />} title="Low-bandwidth mode" hint="Simpler backgrounds and fewer effects" checked={settings.lowBandwidth} onChange={(v) => void setSettings({ lowBandwidth: v })} />
           <SettingRow icon={<Volume2 />} title="Sound effects" hint="Ready for optional future sounds" checked={settings.sound} onChange={(v) => void setSettings({ sound: v })} />

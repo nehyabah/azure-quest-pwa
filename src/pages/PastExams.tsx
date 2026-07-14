@@ -16,7 +16,7 @@ const kindLabels: Record<AttemptKind | "all", string> = {
   all: "All",
   exam: "Exams",
   quiz: "Quizzes",
-  daily: "Daily Boss",
+  daily: "Daily Drill",
   practice: "Practice",
   scenario: "Scenarios",
   case: "Case Files",

@@ -49,6 +49,20 @@ Scope:
 - Add static duplicate-check script.
 - Keep demo/seed warning.
 
+## M1.5 - Professional Azure-blue design polish
+
+Goal:
+Make the M1 product surfaces feel credible, calm, and professional without changing milestone scope.
+
+Scope:
+
+- Keep Azure blue as the primary brand color.
+- Improve typography, borders, cards, buttons, and progress states.
+- Reduce decorative glow, blur, oversized rounding, and busy gradients.
+- Replace playful labels with professional exam-prep language.
+- Preserve demo/seed warnings and Microsoft non-affiliation disclaimers.
+- Preserve M1 exam behavior, attempt persistence, history, retake seeds, and Finish Now behavior.
+
 ## M2 - Job readiness engine
 
 Goal:

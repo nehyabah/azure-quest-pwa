@@ -143,6 +143,29 @@ Resolved for local verification. Current dev server is running at `http://localh
 
 ## M1 run failures
 
+### M1.5 browser verification used production preview after dev HMR noise
+
+Date:
+2026-07-14
+
+Command:
+`npm run dev -- --host localhost`
+
+Error:
+The in-app browser logged Vite HMR websocket errors from `localhost:5173`.
+
+Likely cause:
+Local dev-server websocket/HMR transport noise in the desktop browser environment, not an application runtime error.
+
+Fix attempted:
+Verified the built app with `npm run preview -- --host localhost --port 4173` and filtered browser errors to `localhost:4173`.
+
+Result:
+Preview route checks passed with no current-page console errors. Arena warning, Microsoft disclaimer, flag/report placeholder, question content, and Finish Now were present after the loader.
+
+Remaining issue:
+None for the production build. The existing bundle-size warning remains.
+
 ### Subagent harness validation
 
 Date:

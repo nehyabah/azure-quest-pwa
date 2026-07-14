@@ -25,11 +25,11 @@ function pageTitleFromPath(pathname: string): string {
   if (pathname.includes("/readiness")) return "Readiness";
   if (pathname.includes("/job")) return "Job Ready";
   if (pathname.includes("/arena")) return "Practice";
-  if (pathname.includes("/flashcards")) return "Swipe Cards";
+  if (pathname.includes("/flashcards")) return "Flashcards";
   if (pathname.includes("/history")) return "History";
   if (pathname.includes("/cases")) return "Case Files";
   if (pathname.includes("/kql")) return "KQL Gym";
-  if (pathname.includes("/study")) return "Study Bites";
+  if (pathname.includes("/study")) return "Study";
   if (pathname.includes("/learn")) return "Learn";
   if (pathname.includes("/cert/")) return "Overview";
   return "Azure Quest";
@@ -48,18 +48,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
       "min-h-screen text-slate-950 dark:text-white",
       settings.lowBandwidth
         ? "bg-slate-50 dark:bg-slate-950"
-        : "bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.10),_transparent_28%),linear-gradient(180deg,#ffffff,#f0f7ff)] dark:bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.16),_transparent_28%),linear-gradient(180deg,#080d1a,#0f1f3d)]"
+        : "bg-[linear-gradient(180deg,#ffffff,#f5f9ff)] dark:bg-[linear-gradient(180deg,#07111f,#0b1728)]"
     )}>
-      <header className="sticky top-0 z-40 border-b border-blue-900/10 bg-white/90 backdrop-blur-xl dark:border-blue-300/10 dark:bg-blue-950/86">
+      <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur dark:border-blue-900/50 dark:bg-slate-950/95">
         {/* Mobile app bar */}
         <div className="flex h-14 items-center justify-between px-4 sm:hidden">
           <Link to="/" className="flex items-center gap-2 font-semibold">
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-blue-900 text-sm font-bold text-white shadow-glow dark:bg-blue-300 dark:text-blue-950">AQ</span>
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-blue-700 text-sm font-bold text-white shadow-sm dark:bg-blue-500">AQ</span>
             <span className="text-base">Azure Quest</span>
           </Link>
           <button
             onClick={() => void setSettings({ darkMode: !settings.darkMode })}
-            className="grid h-9 w-9 place-items-center rounded-full bg-blue-50 dark:bg-blue-400/10"
+            className="grid h-9 w-9 place-items-center rounded-md border border-blue-100 bg-blue-50 dark:border-blue-900 dark:bg-blue-950"
             aria-label="Toggle dark mode"
           >
             {settings.darkMode ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
@@ -69,25 +69,25 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {/* Desktop header */}
         <div className="mx-auto hidden max-w-6xl items-center justify-between px-4 py-3 sm:flex">
           <Link to="/" className="flex min-w-0 items-center gap-2 font-semibold">
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-blue-900 text-lg text-white shadow-glow dark:bg-blue-300 dark:text-blue-950">AQ</span>
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-blue-700 text-lg text-white shadow-sm dark:bg-blue-500">AQ</span>
             <span className="min-w-0">
               <span className="block truncate">Azure Quest</span>
               <span className="block text-xs font-extrabold text-slate-500 dark:text-slate-400">Practice exams · interview readiness</span>
             </span>
           </Link>
           <div className="hidden items-center gap-1 lg:flex">
-            <Link to={`/cert/${certSlug}/knowledge`} className="rounded-full px-3 py-2 text-sm font-semibold hover:bg-blue-50 dark:hover:bg-blue-400/10">Exams</Link>
-            <Link to={`/cert/${certSlug}/readiness`} className="rounded-full px-3 py-2 text-sm font-semibold hover:bg-blue-50 dark:hover:bg-blue-400/10">Exam Readiness</Link>
-            <Link to={`/cert/${certSlug}/job`} className="rounded-full px-3 py-2 text-sm font-semibold hover:bg-blue-50 dark:hover:bg-blue-400/10">Job Readiness</Link>
-            <Link to={`/history?cert=${certSlug.toUpperCase()}`} className="rounded-full px-3 py-2 text-sm font-semibold hover:bg-blue-50 dark:hover:bg-blue-400/10">History</Link>
-            <Link to="/settings" className="rounded-full px-3 py-2 text-sm font-semibold hover:bg-blue-50 dark:hover:bg-blue-400/10">Settings</Link>
+            <Link to={`/cert/${certSlug}/knowledge`} className="rounded-md px-3 py-2 text-sm font-semibold hover:bg-blue-50 hover:text-blue-800 dark:hover:bg-blue-500/10 dark:hover:text-blue-100">Exams</Link>
+            <Link to={`/cert/${certSlug}/readiness`} className="rounded-md px-3 py-2 text-sm font-semibold hover:bg-blue-50 hover:text-blue-800 dark:hover:bg-blue-500/10 dark:hover:text-blue-100">Exam Readiness</Link>
+            <Link to={`/cert/${certSlug}/job`} className="rounded-md px-3 py-2 text-sm font-semibold hover:bg-blue-50 hover:text-blue-800 dark:hover:bg-blue-500/10 dark:hover:text-blue-100">Job Readiness</Link>
+            <Link to={`/history?cert=${certSlug.toUpperCase()}`} className="rounded-md px-3 py-2 text-sm font-semibold hover:bg-blue-50 hover:text-blue-800 dark:hover:bg-blue-500/10 dark:hover:text-blue-100">History</Link>
+            <Link to="/settings" className="rounded-md px-3 py-2 text-sm font-semibold hover:bg-blue-50 hover:text-blue-800 dark:hover:bg-blue-500/10 dark:hover:text-blue-100">Settings</Link>
           </div>
           <div className="flex shrink-0 items-center gap-2">
-            <div className="hidden items-center gap-2 rounded-full bg-blue-50 px-3 py-2 text-sm font-semibold dark:bg-blue-400/10 md:flex">
+            <div className="hidden items-center gap-2 rounded-md border border-blue-100 bg-blue-50 px-3 py-2 text-sm font-semibold dark:border-blue-900 dark:bg-blue-950 md:flex">
               {settings.lowBandwidth ? <WifiOff className="h-4 w-4" /> : <Wifi className="h-4 w-4" />}
               <Switch checked={settings.lowBandwidth} onCheckedChange={(v) => void setSettings({ lowBandwidth: v })} label="Low bandwidth" />
             </div>
-            <div className="flex items-center gap-2 rounded-full bg-blue-50 px-3 py-2 text-sm font-semibold dark:bg-blue-400/10">
+            <div className="flex items-center gap-2 rounded-md border border-blue-100 bg-blue-50 px-3 py-2 text-sm font-semibold dark:border-blue-900 dark:bg-blue-950">
               {settings.darkMode ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
               <Switch checked={settings.darkMode} onCheckedChange={(v) => void setSettings({ darkMode: v })} label="Dark mode" />
             </div>
@@ -102,7 +102,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </footer>
       </main>
 
-      <nav className="fixed bottom-3 left-1/2 z-50 w-[calc(100%-1.5rem)] max-w-lg -translate-x-1/2 rounded-2xl border border-white/40 bg-white/60 p-2 shadow-card backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/60 sm:hidden">
+      <nav className="fixed bottom-3 left-1/2 z-50 w-[calc(100%-1.5rem)] max-w-lg -translate-x-1/2 rounded-lg border border-slate-200 bg-white/95 p-2 shadow-card backdrop-blur dark:border-blue-900/60 dark:bg-slate-950/95 sm:hidden">
         <div className="grid grid-cols-5 gap-1">
           {mobileNav.map((item) => {
             const Icon = item.icon;
@@ -112,10 +112,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 to={item.to}
                 className={({ isActive }) =>
                   cn(
-                    "flex min-h-14 flex-col items-center justify-center gap-1 rounded-xl px-1 py-2 text-center text-[0.58rem] font-semibold leading-tight transition",
+                    "flex min-h-14 flex-col items-center justify-center gap-1 rounded-md px-1 py-2 text-center text-[0.58rem] font-semibold leading-tight transition",
                     isActive
-                      ? "bg-white/80 text-slate-950 shadow-sm backdrop-blur dark:bg-white/15 dark:text-white"
-                      : "text-slate-400 dark:text-slate-500"
+                      ? "bg-blue-50 text-blue-800 shadow-sm dark:bg-blue-950 dark:text-blue-100"
+                      : "text-slate-500 dark:text-slate-400"
                   )
                 }
               >

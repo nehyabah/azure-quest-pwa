@@ -22,9 +22,9 @@ export function KnowledgeCheck() {
 
   return (
     <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} className="space-y-5">
-      <section className={`pro-panel rounded-2xl border border-blue-900/10 p-5 text-blue-950 shadow-card dark:border-blue-300/10 dark:text-white sm:p-6`}>
-        <Badge className="mb-3">{cert} Exam Center</Badge>
-        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Practice exams and quizzes.</h1>
+      <section className="rounded-lg border border-blue-100 bg-white p-5 text-blue-950 shadow-card dark:border-blue-900/60 dark:bg-slate-950 dark:text-white sm:p-6">
+        <Badge className="mb-3 bg-blue-700 text-white dark:border-blue-500 dark:bg-blue-500">{cert} Exam Center</Badge>
+        <h1 className="text-3xl font-semibold leading-tight sm:text-4xl">Practice exams and quizzes.</h1>
         <p className="mt-3 max-w-2xl text-sm font-medium text-blue-900/70 dark:text-blue-50/75">Focused sprints and full mocks. Answers stay hidden until you finish, so timing stays realistic.</p>
       </section>
 
@@ -32,17 +32,17 @@ export function KnowledgeCheck() {
 
       <div className="grid grid-cols-3 gap-3">
         <Card className="flex flex-col items-center p-4 text-center sm:p-6">
-          <Clock className="mb-2 h-6 w-6 shrink-0 text-slate-400" />
+          <Clock className="mb-2 h-6 w-6 shrink-0 text-blue-600 dark:text-blue-300" />
           <p className="text-base font-semibold leading-tight sm:text-lg">10Q · 12m</p>
           <p className="mt-1 text-xs font-semibold text-slate-500 dark:text-slate-400">Quiz Sprints</p>
         </Card>
         <Card className="flex flex-col items-center p-4 text-center sm:p-6">
-          <FileQuestion className="mb-2 h-6 w-6 shrink-0 text-slate-400" />
+          <FileQuestion className="mb-2 h-6 w-6 shrink-0 text-blue-600 dark:text-blue-300" />
           <p className="text-base font-semibold leading-tight sm:text-lg">50Q · 100m</p>
           <p className="mt-1 text-xs font-semibold text-slate-500 dark:text-slate-400">Mock Exams</p>
         </Card>
         <Card className="flex flex-col items-center p-4 text-center sm:p-6">
-          <BarChart3 className="mb-2 h-6 w-6 shrink-0 text-slate-400" />
+          <BarChart3 className="mb-2 h-6 w-6 shrink-0 text-blue-600 dark:text-blue-300" />
           <p className="text-base font-semibold leading-tight sm:text-lg">{latest ? `${latest.percentage}%` : "—"}</p>
           <p className="mt-1 w-full truncate text-xs font-semibold text-slate-500 dark:text-slate-400">{latest ? latest.title : "Latest"}</p>
         </Card>
@@ -53,14 +53,14 @@ export function KnowledgeCheck() {
         <div className="mb-3"><QuestionBankNotice compact /></div>
         <div className="grid gap-3 sm:grid-cols-2">
           {certQuizzes.map((quiz) => (
-            <div key={quiz.id} className="rounded-xl border border-slate-200 bg-white p-4 dark:border-white/10 dark:bg-white/5">
+            <div key={quiz.id} className="rounded-lg border border-slate-200 bg-white p-4 transition hover:border-blue-300 dark:border-blue-900/60 dark:bg-slate-900 dark:hover:border-blue-700">
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <Badge className="mb-2">{quiz.domain}</Badge>
                   <h3 className="text-base font-semibold">{quiz.title}</h3>
                   <p className="mt-1 text-sm font-medium text-slate-500 dark:text-slate-400">{quiz.focusTags.join(" · ")}</p>
                 </div>
-                <Button asChild size="sm" variant="hero" className="shrink-0"><Link to={`/arena?cert=${cert}&mode=quiz&count=10&minutes=12&quizId=${quiz.id}&domain=${encodeURIComponent(quiz.domain)}&tags=${encodeURIComponent(quiz.focusTags.join(","))}&examTitle=${encodeURIComponent(`${cert} ${quiz.title}`)}`}><Play className="h-4 w-4" /> Start</Link></Button>
+                  <Button asChild size="sm" variant="hero" className="shrink-0"><Link to={`/arena?cert=${cert}&mode=quiz&count=10&minutes=12&quizId=${quiz.id}&domain=${encodeURIComponent(quiz.domain)}&tags=${encodeURIComponent(quiz.focusTags.join(","))}&examTitle=${encodeURIComponent(`${cert} ${quiz.title}`)}`}><Play className="h-4 w-4" /> Start</Link></Button>
               </div>
             </div>
           ))}
@@ -74,10 +74,10 @@ export function KnowledgeCheck() {
           {certExams.map((exam) => {
             const best = attempts.filter((a) => a.blueprintId === exam.id).sort((a, b) => b.percentage - a.percentage)[0];
             return (
-              <div key={exam.id} className="rounded-xl border border-slate-200 bg-white p-4 dark:border-white/10 dark:bg-white/5">
+              <div key={exam.id} className="rounded-lg border border-slate-200 bg-white p-4 transition hover:border-blue-300 dark:border-blue-900/60 dark:bg-slate-900 dark:hover:border-blue-700">
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <Badge className="mb-2 bg-blue-900 text-white dark:bg-blue-300 dark:text-blue-950">{exam.title}</Badge>
+                    <Badge className="mb-2 bg-blue-700 text-white dark:border-blue-500 dark:bg-blue-500">{exam.title}</Badge>
                     <h3 className="text-base font-semibold">Weighted structure changes every launch</h3>
                     <p className="mt-1 text-sm font-medium text-slate-500 dark:text-slate-400">50 questions · 100 minutes · unanswered grade wrong</p>
                   </div>

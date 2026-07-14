@@ -17,9 +17,9 @@ Blocked until:
 - duplicate checks pass
 - human/admin review approves questions
 
-## UI question-bank warning blocker
+## M1.5 UI question-bank warning blocker
 
-M0/M1 completion is blocked unless the UI visibly labels the current question bank as demo/seed content.
+M0/M1/M1.5 completion is blocked unless the UI visibly labels the current question bank as demo/seed content.
 
 Required copy or equivalent:
 
@@ -52,12 +52,12 @@ Any feature that calls an LLM, imports GitHub repositories, generates questions,
 
 ## Backend blocker
 
-Supabase is not part of M0.
+Supabase is not part of M1.5.
 
 Do not add backend work until M3 is approved.
 
 ## GitHub blocker
 
-GitHub OAuth/import is not part of M0.
+GitHub OAuth/import is not part of M1.5.
 
 Do not add GitHub import until M4 is approved.

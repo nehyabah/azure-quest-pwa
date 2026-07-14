@@ -24,22 +24,22 @@ export function CertHome() {
 
   return (
     <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} className="space-y-5">
-      <section className={`overflow-hidden rounded-[2rem] bg-gradient-to-br ${meta.accent} p-5 text-white shadow-card sm:p-6`}>
-        <Badge className="mb-3 bg-white/20 text-white">{cert}</Badge>
-        <h1 className="text-2xl font-black tracking-tight sm:text-5xl">{meta.title}</h1>
-        <p className="mt-3 max-w-2xl text-sm font-bold text-white/80 sm:text-base">{meta.summary}</p>
+      <section className="overflow-hidden rounded-lg border border-blue-100 bg-white p-5 text-blue-950 shadow-card dark:border-blue-900/60 dark:bg-slate-950 dark:text-white sm:p-6">
+        <Badge className="mb-3 bg-blue-700 text-white dark:border-blue-500 dark:bg-blue-500">{cert}</Badge>
+        <h1 className="text-2xl font-semibold leading-tight sm:text-5xl">{meta.title}</h1>
+        <p className="mt-3 max-w-2xl text-sm font-medium text-slate-600 dark:text-slate-300 sm:text-base">{meta.summary}</p>
         <div className="mt-5 grid grid-cols-3 gap-2 sm:gap-3">
-          <div className="rounded-[1.2rem] bg-white/15 p-3 sm:rounded-[1.4rem] sm:p-4">
-            <div className="text-3xl font-black sm:text-4xl">{readiness}%</div>
-            <p className="mt-0.5 text-xs font-black opacity-80">READINESS</p>
+          <div className="rounded-lg border border-blue-100 bg-blue-50 p-3 dark:border-blue-900/60 dark:bg-blue-950/40 sm:p-4">
+            <div className="text-3xl font-semibold sm:text-4xl">{readiness}%</div>
+            <p className="mt-0.5 text-xs font-semibold text-slate-500 dark:text-slate-400">READINESS</p>
           </div>
-          <div className="rounded-[1.2rem] bg-white/15 p-3 sm:rounded-[1.4rem] sm:p-4">
-            <div className="text-xl font-black sm:text-2xl">10Q · 12m</div>
-            <p className="mt-0.5 text-xs font-black opacity-80">SPRINTS</p>
+          <div className="rounded-lg border border-blue-100 bg-blue-50 p-3 dark:border-blue-900/60 dark:bg-blue-950/40 sm:p-4">
+            <div className="text-xl font-semibold sm:text-2xl">10Q · 12m</div>
+            <p className="mt-0.5 text-xs font-semibold text-slate-500 dark:text-slate-400">SPRINTS</p>
           </div>
-          <div className="rounded-[1.2rem] bg-white/15 p-3 sm:rounded-[1.4rem] sm:p-4">
-            <div className="text-xl font-black sm:text-2xl">{meta.readinessTarget}%</div>
-            <p className="mt-0.5 text-xs font-black opacity-80">PASS TARGET</p>
+          <div className="rounded-lg border border-blue-100 bg-blue-50 p-3 dark:border-blue-900/60 dark:bg-blue-950/40 sm:p-4">
+            <div className="text-xl font-semibold sm:text-2xl">{meta.readinessTarget}%</div>
+            <p className="mt-0.5 text-xs font-semibold text-slate-500 dark:text-slate-400">PASS TARGET</p>
           </div>
         </div>
       </section>
@@ -51,13 +51,13 @@ export function CertHome() {
           const Icon = card.icon;
           return (
             <Link key={card.key} to={`/cert/${pathFor(cert)}/${card.key}`}>
-              <Card className="group h-full transition hover:-translate-y-1 hover:shadow-glow">
+              <Card className="group h-full transition hover:border-blue-300 hover:shadow-card dark:hover:border-blue-700">
                 <CardHeader>
-                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-slate-950 text-white dark:bg-white dark:text-slate-950"><Icon className="h-6 w-6" /></div>
-                  <CardTitle className="text-2xl">{card.title}</CardTitle>
+                  <div className="grid h-12 w-12 place-items-center rounded-lg bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-200"><Icon className="h-6 w-6" /></div>
+                  <CardTitle className="text-xl">{card.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="font-bold text-slate-500 dark:text-slate-400">{card.description}</p>
+                  <p className="font-medium text-slate-500 dark:text-slate-400">{card.description}</p>
                 </CardContent>
               </Card>
             </Link>
@@ -69,18 +69,18 @@ export function CertHome() {
         <CardHeader><CardTitle>Domain map</CardTitle><BookOpen className="h-6 w-6" /></CardHeader>
         <div className="grid gap-3">
           {docInfo.domains.map((domain) => (
-            <div key={domain.name} className="rounded-2xl bg-slate-100 p-4 dark:bg-white/10">
-              <div className="mb-2 flex justify-between gap-3 text-sm font-black"><span>{domain.name}</span><span>{domain.weight}</span></div>
+            <div key={domain.name} className="rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-blue-900/60 dark:bg-slate-900">
+              <div className="mb-2 flex justify-between gap-3 text-sm font-semibold"><span>{domain.name}</span><span>{domain.weight}</span></div>
               <Progress value={Number(domain.weight.match(/\d+/)?.[0] ?? 25)} />
             </div>
           ))}
         </div>
       </Card>
 
-      <Card className="bg-slate-950 text-white dark:bg-white dark:text-slate-950">
+      <Card className="border-blue-700 bg-blue-700 text-white dark:border-blue-500 dark:bg-blue-950 dark:text-white">
         <CardHeader><CardTitle>Job-readiness promise</CardTitle><ShieldCheck className="h-6 w-6" /></CardHeader>
-        <p className="text-lg font-bold opacity-80">This path does not only prepare you to pass. It prepares you to explain your projects, answer interviewer follow-ups, and sound like someone who has built real cloud security controls.</p>
-        <Link className="mt-4 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 font-black text-slate-950 dark:bg-slate-950 dark:text-white" to={`/cert/${pathFor(cert)}/job`}><GraduationCap className="h-5 w-5" /> Start Job Readiness</Link>
+        <p className="text-lg font-medium opacity-90">This path does not only prepare you to pass. It prepares you to explain your projects, answer interviewer follow-ups, and sound like someone who has built real cloud security controls.</p>
+        <Link className="mt-4 inline-flex items-center gap-2 rounded-md bg-white px-5 py-3 font-semibold text-blue-800 dark:text-blue-900" to={`/cert/${pathFor(cert)}/job`}><GraduationCap className="h-5 w-5" /> Start Job Readiness</Link>
       </Card>
     </motion.div>
   );

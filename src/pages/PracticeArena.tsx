@@ -24,8 +24,8 @@ function validMode(value: string | null): ExamMode {
 }
 
 function optionTone(optionId: QuizOption["id"], selected: QuizOption["id"] | null) {
-  if (optionId === selected) return "bg-blue-900 text-white ring-2 ring-blue-300 dark:bg-blue-300 dark:text-blue-950";
-  return "bg-white text-blue-950 hover:bg-blue-50 dark:bg-blue-950/50 dark:text-blue-50 dark:hover:bg-blue-900/70";
+  if (optionId === selected) return "border-blue-600 bg-blue-700 text-white ring-2 ring-blue-200 dark:border-blue-400 dark:bg-blue-500 dark:ring-blue-800";
+  return "border-slate-200 bg-white text-blue-950 hover:border-blue-300 hover:bg-blue-50 dark:border-blue-900/60 dark:bg-slate-950 dark:text-blue-50 dark:hover:border-blue-700 dark:hover:bg-blue-950";
 }
 
 export function PracticeArena() {
@@ -42,7 +42,7 @@ export function PracticeArena() {
   const timeLimitSeconds = minutes * 60;
   const weakTags = Object.entries(userProgress.weakTags).sort((a, b) => b[1] - a[1]).slice(0, 6).map(([tag]) => tag);
   const seedParam = params.get("seed") ?? undefined;
-  const examTitle = params.get("examTitle") ?? `${cert} ${mode === "quiz" ? "Quiz Sprint" : mode === "daily" ? "Daily Boss" : mode === "case" ? "Case File" : "Mock Exam"}`;
+  const examTitle = params.get("examTitle") ?? `${cert} ${mode === "quiz" ? "Quiz Sprint" : mode === "daily" ? "Daily Drill" : mode === "case" ? "Case File" : "Mock Exam"}`;
   const blueprintId = params.get("examId") ?? undefined;
   const quizId = params.get("quizId") ?? undefined;
   const focusDomain = params.get("domain") ?? undefined;
@@ -226,8 +226,8 @@ export function PracticeArena() {
           className="w-full max-w-sm space-y-6 px-8 text-center"
         >
           <div className="space-y-1">
-            <Badge className="mb-4 bg-blue-400/20 text-blue-300">{cert}</Badge>
-            <h2 className="text-2xl font-semibold tracking-tight text-white">{examTitle}</h2>
+            <Badge className="mb-4 border-blue-500/40 bg-blue-500/20 text-blue-100">{cert}</Badge>
+            <h2 className="text-2xl font-semibold text-white">{examTitle}</h2>
             <p className="text-sm text-slate-400">{count} questions · {minutes} min</p>
             <p className="mx-auto max-w-xs pt-3 text-xs font-semibold text-emerald-200">{MICROSOFT_DISCLAIMER}</p>
           </div>
@@ -269,8 +269,8 @@ export function PracticeArena() {
           className="w-full max-w-sm space-y-6 px-8 text-center"
         >
           <div className="space-y-1">
-            <Badge className="mb-4 bg-blue-400/20 text-blue-300">{cert}</Badge>
-            <h2 className="text-2xl font-semibold tracking-tight text-white">{examTitle}</h2>
+            <Badge className="mb-4 border-blue-500/40 bg-blue-500/20 text-blue-100">{cert}</Badge>
+            <h2 className="text-2xl font-semibold text-white">{examTitle}</h2>
             <p className="text-sm text-slate-400">{Object.keys(selections).length} of {exam.questions.length} answered</p>
           </div>
 
@@ -295,10 +295,10 @@ export function PracticeArena() {
   if (finished) {
     return (
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
-        <Card className={finalAttempt.passed ? "bg-blue-700 text-white" : "bg-slate-950 text-white"}>
+        <Card className={finalAttempt.passed ? "border-blue-700 bg-blue-700 text-white dark:border-blue-500 dark:bg-blue-950" : "border-slate-900 bg-slate-950 text-white"}>
           <CardHeader>
             <div>
-              <Badge className="bg-white/20 text-white">{finalAttempt.kind.toUpperCase()} COMPLETE</Badge>
+              <Badge className="border-white/20 bg-white/15 text-white">{finalAttempt.kind.toUpperCase()} COMPLETE</Badge>
               <CardTitle className="mt-3 text-3xl">{examTitle}</CardTitle>
               <p className="font-medium opacity-80">{formatSeconds(finalAttempt.timeTakenSeconds)} used · {formatSeconds(timeLimitSeconds)} limit</p>
             </div>
@@ -309,11 +309,21 @@ export function PracticeArena() {
           </CardHeader>
           <Progress value={finalAttempt.percentage} className="bg-white/30" />
           <div className="mt-5 grid grid-cols-3 gap-3 text-center">
-            <div className="rounded-xl bg-white/20 p-3"><p className="text-xl font-semibold">{finalAttempt.score}</p><p className="text-xs font-semibold">Correct</p></div>
-            <div className="rounded-xl bg-white/20 p-3"><p className="text-xl font-semibold">{finalAttempt.total}</p><p className="text-xs font-semibold">Total</p></div>
-            <div className="rounded-xl bg-white/20 p-3"><p className="text-xl font-semibold">+{finalAttempt.readinessDelta ?? 0}</p><p className="text-xs font-semibold">Readiness</p></div>
+            <div className="rounded-lg border border-white/20 bg-white/15 p-3"><p className="text-xl font-semibold">{finalAttempt.score}</p><p className="text-xs font-semibold">Correct</p></div>
+            <div className="rounded-lg border border-white/20 bg-white/15 p-3"><p className="text-xl font-semibold">{finalAttempt.total}</p><p className="text-xs font-semibold">Total</p></div>
+            <div className="rounded-lg border border-white/20 bg-white/15 p-3"><p className="text-xl font-semibold">+{finalAttempt.readinessDelta ?? 0}</p><p className="text-xs font-semibold">Readiness</p></div>
           </div>
         </Card>
+
+        {saveError ? (
+          <Card className="border-rose-200 bg-rose-50 text-rose-950 dark:border-rose-500/30 dark:bg-rose-950/30 dark:text-rose-50">
+            <CardHeader>
+              <CardTitle>Attempt not saved yet</CardTitle>
+            </CardHeader>
+            <p className="text-sm font-medium">Your score is shown below, but local progress and history were not updated. {saveError}</p>
+            <Button onClick={() => setSaveError(null)} className="mt-4" variant="soft">Retry save</Button>
+          </Card>
+        ) : null}
 
         <Card>
           <CardHeader><CardTitle>Domain report</CardTitle><ShieldCheck className="h-6 w-6 text-blue-500" /></CardHeader>
@@ -368,15 +378,15 @@ export function PracticeArena() {
         <Button asChild variant="ghost" size="sm"><Link to={`/cert/${cert.toLowerCase()}/knowledge`}><ArrowLeft className="h-4 w-4" /> Knowledge</Link></Button>
         <div className="flex min-w-0 items-center justify-end gap-2">
           <Badge className="max-w-[140px] truncate sm:max-w-none">{examTitle}</Badge>
-          {fighter ? <Badge className="hidden bg-slate-950 text-white dark:bg-white dark:text-slate-950 sm:inline-flex">{fighter}</Badge> : null}
-          <Badge className={`shrink-0 ${timeLeft < 60 ? "bg-rose-500 text-white" : "bg-blue-100 text-blue-950"}`}><Clock className="h-3 w-3" /> {formatSeconds(timeLeft)}</Badge>
+          {fighter ? <Badge className="hidden border-blue-200 bg-blue-50 text-blue-800 dark:border-blue-800 dark:bg-blue-950 dark:text-blue-100 sm:inline-flex">{fighter}</Badge> : null}
+          <Badge className={`shrink-0 ${timeLeft < 60 ? "border-rose-500 bg-rose-500 text-white" : "border-blue-200 bg-blue-50 text-blue-800 dark:border-blue-800 dark:bg-blue-950 dark:text-blue-100"}`}><Clock className="h-3 w-3" /> {formatSeconds(timeLeft)}</Badge>
         </div>
       </div>
 
       <Card className="overflow-hidden">
         <CardHeader>
           <div>
-            <Badge className="mb-2 bg-blue-900 text-white dark:bg-blue-300 dark:text-blue-950">{question.scenarioOrg}</Badge>
+            <Badge className="mb-2 bg-blue-700 text-white dark:border-blue-500 dark:bg-blue-500">{question.scenarioOrg}</Badge>
             <CardTitle className="text-xl">Question {index + 1}/{exam.questions.length}</CardTitle>
             <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{question.domain}</p>
           </div>
@@ -389,11 +399,11 @@ export function PracticeArena() {
       </Card>
 
       <motion.div key={question.id} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
-        <Card className="border-2 border-slate-950/10 dark:border-white/10">
+        <Card className="border-blue-100 dark:border-blue-900/60">
           <CardContent>
             <p className="text-xl font-semibold leading-tight">{question.stem}</p>
-            {question.diagram ? <pre className="rounded-xl bg-slate-950 p-4 text-sm font-medium text-sky-200 dark:bg-black/40">{question.diagram}</pre> : null}
-            <div className="mt-4 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-3 dark:border-white/15 dark:bg-white/5">
+            {question.diagram ? <pre className="rounded-lg bg-slate-950 p-4 text-sm font-medium text-sky-200 dark:bg-black/40">{question.diagram}</pre> : null}
+            <div className="mt-4 rounded-lg border border-dashed border-blue-200 bg-blue-50 p-3 dark:border-blue-900/70 dark:bg-blue-950/30">
               <button
                 type="button"
                 onClick={() => setFlaggedQuestionIds((prev) => ({ ...prev, [question.id]: !prev[question.id] }))}
@@ -407,20 +417,10 @@ export function PracticeArena() {
           </CardContent>
         </Card>
 
-        {saveError ? (
-          <Card className="border-rose-200 bg-rose-50 text-rose-950 dark:border-rose-500/30 dark:bg-rose-950/30 dark:text-rose-50">
-            <CardHeader>
-              <CardTitle>Attempt not saved yet</CardTitle>
-            </CardHeader>
-            <p className="text-sm font-medium">Your score is shown below, but local progress and history were not updated. {saveError}</p>
-            <Button onClick={() => setSaveError(null)} className="mt-4" variant="soft">Retry save</Button>
-          </Card>
-        ) : null}
-
         <div className="grid gap-3">
           {question.options.map((option) => (
-            <motion.button whileTap={{ scale: 0.98 }} key={option.id} onClick={() => choose(option.id)} className={`flex min-h-16 items-center gap-3 rounded-xl p-4 text-left text-base font-semibold shadow-sm transition ${optionTone(option.id, selected)}`}>
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-black/10 text-sm dark:bg-white/10">{option.id}</span>
+            <motion.button whileTap={{ scale: 0.99 }} key={option.id} onClick={() => choose(option.id)} className={`flex min-h-16 items-center gap-3 rounded-lg border p-4 text-left text-base font-semibold shadow-sm transition ${optionTone(option.id, selected)}`}>
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-black/10 text-sm dark:bg-white/10">{option.id}</span>
               <span className="flex-1">{option.text}</span>
               {selected === option.id ? <CheckCircle2 className="h-5 w-5" /> : null}
             </motion.button>

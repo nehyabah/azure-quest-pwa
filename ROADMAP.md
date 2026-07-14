@@ -6,6 +6,8 @@ M0 - Vercel migration + harness reset + build stability
 
 M1 - Exam engine hardening
 
+M1.5 - Professional Azure-blue design polish
+
 M2 - World-class Job Readiness
 
 M3 - Supabase foundation

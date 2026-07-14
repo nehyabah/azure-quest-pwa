@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Started M1.5 professional Azure-blue design polish.
+- Updated shared UI primitives with cleaner typography, crisper borders, calmer Azure-blue buttons, badges, cards, and progress states.
+- Refined layout, path selection, cert overview, exam landing, and practice arena styling for a more professional product feel.
+- Replaced playful labels such as Daily Boss, Swipe Cards, and Cozy cyber cave with professional wording.
+- Moved retryable attempt-save error messaging onto the results screen where save failures actually surface.
 - Added a three-subagent harness: UI/UX Revamp Lead, Senior Software Engineer, and QA and Product Lead.
 - Captured initial subagent audit findings in `docs/reports/subagent-audit.md`.
 - Normalized mobile navigation labels to approved M1 wording.

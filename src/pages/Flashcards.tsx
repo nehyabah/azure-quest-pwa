@@ -44,7 +44,7 @@ export function Flashcards() {
       <Card className="bg-gradient-to-br from-violet-500 to-sky-500 text-white">
         <CardHeader>
           <div>
-            <CardTitle className="text-2xl sm:text-3xl">Swipe Cards</CardTitle>
+            <CardTitle className="text-2xl sm:text-3xl">Flashcards</CardTitle>
             <p className="font-bold opacity-85">Swipe left for review. Swipe right for confident recall.</p>
           </div>
           <div className="text-right"><Brain className="ml-auto h-9 w-9" /><p className="mt-2 rounded-full bg-white/20 px-3 py-1 text-sm font-black">Combo x{combo}</p></div>

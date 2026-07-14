@@ -65,7 +65,7 @@ function badgesFor(progress: UserProgress, attempt: ExamAttempt) {
   if (attempt.cert === "SC-500" && attempt.percentage >= 80) next.add("Cloud AI Defender");
   if (Object.values(attempt.domains).every((d) => d.total > 0 && d.correct / d.total >= 0.8)) next.add("Least Privilege Legend");
   if (attempt.mode === "weak" && attempt.percentage >= 70) next.add("Weakness Crusher");
-  if (attempt.mode === "daily" && attempt.percentage >= 70) next.add("Daily Boss Hunter");
+  if (attempt.mode === "daily" && attempt.percentage >= 70) next.add("Daily Drill Complete");
   if (attempt.kind === "quiz" && attempt.percentage >= 90) next.add("Quiz Ace");
   if (attempt.kind === "exam" && attempt.percentage >= 70) next.add("Exam Ready");
   if ((progress.readiness?.[attempt.cert] ?? 0) >= 80) next.add("Readiness Climber");
