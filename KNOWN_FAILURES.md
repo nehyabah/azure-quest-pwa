@@ -303,3 +303,72 @@ Resolved by separate commands.
 
 Remaining issue:
 None.
+
+### PowerShell mojibake cleanup command parse error
+
+Date:
+2026-07-14
+
+Command:
+Direct PowerShell string replacement for mojibake cleanup in `src`.
+
+Error:
+PowerShell rejected the command because the replacement string quoting was malformed.
+
+Likely cause:
+The command mixed encoded characters and quoted replacement strings in a way PowerShell parsed incorrectly.
+
+Fix attempted:
+Re-ran cleanup using safer `Get-Content -Raw` reads and explicit file writes.
+
+Result:
+Resolved. Follow-up scans found no remaining `Â`, `â`, or rejected playful-copy markers in `src`.
+
+Remaining issue:
+None.
+
+### PowerShell recursive cleanup attempted directories
+
+Date:
+2026-07-14
+
+Command:
+Recursive PowerShell cleanup using `Get-ChildItem -Recurse -Include` over source paths.
+
+Error:
+PowerShell reported directory access/read errors while the cleanup loop attempted to process directories as files.
+
+Likely cause:
+The file enumeration was too broad and included directory entries.
+
+Fix attempted:
+Restricted cleanup to file content reads and then verified with targeted `rg` scans.
+
+Result:
+Resolved. No remaining mojibake markers were found in `src`.
+
+Remaining issue:
+None.
+
+### M1.5 follow-up audit rejected first visual polish as insufficient
+
+Date:
+2026-07-14
+
+Command:
+Three-subagent M1.5 follow-up audit.
+
+Error:
+The UI/UX and QA/Product audits found release-blocking quality issues: Job Readiness and History still looked under-polished, global borders were too loud, low-bandwidth styling was overridden, and interview copy had cleanup regressions.
+
+Likely cause:
+The first design polish pass updated shared primitives and several pages but did not fully apply the design system to every high-traffic surface.
+
+Fix attempted:
+Applied a stronger Azure-blue system pass, softened borders, removed remote font import, fixed low-bandwidth behavior, reworked Job Readiness/History/Study/Readiness surfaces, added selected-state semantics, and repaired damaged copy.
+
+Result:
+Resolved locally. `npm run lint`, `npm run validate:harness`, `npm run validate:questions`, `npm run check:routes`, and `npm run build` pass.
+
+Remaining issue:
+Production deployment still needs to be updated after the local M1.5 correction commit.

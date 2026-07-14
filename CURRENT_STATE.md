@@ -45,8 +45,10 @@ It has:
 - Cert landing pages now show the demo/seed question-bank warning.
 - Legacy dashboard no longer sends users to stale `/learn`.
 - Attempt persistence now awaits local save and surfaces retryable save errors on the results screen instead of failing silently.
-- M1.5 professional Azure-blue visual polish is in progress across shared UI primitives, layout, path selection, cert overview, exam landing, and practice arena.
-- Playful labels such as Daily Boss, Swipe Cards, and Cozy cyber cave have been replaced with professional wording.
+- M1.5 professional Azure-blue visual polish now covers shared UI primitives, layout, path selection, cert overview, exam landing, practice arena, readiness, history, study mode, and job readiness.
+- The M1.5 follow-up audit corrected overly timid visuals with softer Azure borders, system typography, calmer page backgrounds, sharper cards, improved selected states, and low-bandwidth-safe styling.
+- Playful labels such as Daily Boss, Swipe Cards, Cozy cyber cave, Explain Like I'm 5, and Next bite have been replaced with professional wording.
+- Three M1.5 follow-up subagents reviewed UI/UX, senior engineering risk, and QA/product quality; their release-blocking findings were fixed before deployment.
 
 ## What is demo/static
 

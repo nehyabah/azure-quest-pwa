@@ -8,12 +8,12 @@ export const MICROSOFT_DISCLAIMER = "Not affiliated with or endorsed by Microsof
 
 export function QuestionBankNotice({ compact = false }: { compact?: boolean }) {
   return (
-    <Card className={compact ? "border-emerald-900/20 bg-emerald-50 p-3 text-emerald-950 dark:border-emerald-300/20 dark:bg-emerald-950/30 dark:text-emerald-50" : "border-emerald-900/20 bg-emerald-50 p-4 text-emerald-950 dark:border-emerald-300/20 dark:bg-emerald-950/30 dark:text-emerald-50"}>
+    <Card className={compact ? "border-l-4 border-[#9cc9f5] border-l-amber-400 bg-white p-3 text-slate-950 dark:border-[#24486f] dark:border-l-amber-300 dark:bg-[#081d38] dark:text-[#e7f3ff]" : "border-l-4 border-[#9cc9f5] border-l-amber-400 bg-white p-4 text-slate-950 dark:border-[#24486f] dark:border-l-amber-300 dark:bg-[#081d38] dark:text-[#e7f3ff]"}>
       <div className="flex gap-3">
-        <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-emerald-700 dark:text-emerald-300" />
+        <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-300" />
         <div className="space-y-1">
           <p className={compact ? "text-sm font-semibold leading-snug" : "font-semibold leading-snug"}>{DEMO_BANK_COPY}</p>
-          <p className="text-xs font-semibold uppercase tracking-wide text-emerald-800/70 dark:text-emerald-200/70">{MICROSOFT_DISCLAIMER}</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-[#0057b8] dark:text-[#8cc8ff]">{MICROSOFT_DISCLAIMER}</p>
         </div>
       </div>
     </Card>

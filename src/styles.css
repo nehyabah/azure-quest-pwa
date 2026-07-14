@@ -3,12 +3,38 @@
 @tailwind utilities;
 
 :root {
-  font-family: "Inter", "Aptos", "Segoe UI Variable", "Segoe UI", "SF Pro Text", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --aq-blue-950: #071a3d;
+  --aq-blue-900: #08245c;
+  --aq-blue-800: #063a88;
+  --aq-blue-700: #0057b8;
+  --aq-blue-600: #0078d4;
+  --aq-blue-500: #2b88d8;
+  --aq-blue-100: #d7ebff;
+  --aq-blue-50: #eff7ff;
+  --aq-border: #c2daf3;
+  --aq-ink: #102033;
+  --aq-muted: #5d6b82;
+  --aq-shadow: 0 14px 34px rgba(0, 87, 184, 0.10);
+  font-family: "Aptos", "Segoe UI Variable", "Segoe UI", "Inter", "SF Pro Text", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   color-scheme: light;
-  font-size: 14px;
+  font-size: 15px;
 }
 
-.dark { color-scheme: dark; }
+.dark {
+  --aq-blue-950: #061227;
+  --aq-blue-900: #092a61;
+  --aq-blue-800: #0b3f88;
+  --aq-blue-700: #106ebe;
+  --aq-blue-600: #2899f5;
+  --aq-blue-500: #59b4ff;
+  --aq-blue-100: #173f73;
+  --aq-blue-50: #0a1d38;
+  --aq-border: #24486f;
+  --aq-ink: #f5f9ff;
+  --aq-muted: #a9bad0;
+  --aq-shadow: 0 16px 38px rgba(0, 120, 212, 0.18);
+  color-scheme: dark;
+}
 
 * { box-sizing: border-box; }
 
@@ -19,17 +45,24 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: geometricPrecision;
   letter-spacing: 0;
+  line-height: 1.5;
+  color: var(--aq-ink);
 }
 
 h1, h2, h3, .font-black {
   letter-spacing: 0;
 }
 
+h1, h2, h3 {
+  font-weight: 700;
+}
+
 .font-black { font-weight: 700 !important; }
-.font-extrabold { font-weight: 650 !important; }
-.font-bold { font-weight: 560 !important; }
+.font-extrabold { font-weight: 700 !important; }
+.font-bold { font-weight: 650 !important; }
 
 pre {
+  font-family: "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   white-space: pre-wrap;
   word-break: break-word;
 }
@@ -37,12 +70,108 @@ pre {
 .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
 
 .luxury-panel {
-  background: linear-gradient(135deg, #003b73, #0f172a);
+  background: linear-gradient(135deg, var(--aq-blue-800), var(--aq-blue-950));
 }
 
 .pro-panel {
-  background: linear-gradient(135deg, #ffffff, #f8fbff 62%, #eaf3ff);
+  background: linear-gradient(135deg, #ffffff, var(--aq-blue-50) 62%, #dfefff);
 }
 .dark .pro-panel {
-  background: linear-gradient(135deg, #07111f, #0b2545 62%, #003b73);
+  background: linear-gradient(135deg, var(--aq-blue-950), #081d38 58%, var(--aq-blue-800));
+}
+
+.aq-page-shell {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 46%, #eef6ff 100%);
+}
+
+.dark .aq-page-shell {
+  background: linear-gradient(180deg, #061227 0%, #081d38 48%, #071a3d 100%);
+}
+
+.aq-section {
+  border: 1px solid var(--aq-border);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--aq-shadow);
+}
+
+.dark .aq-section {
+  background: rgba(6, 18, 39, 0.96);
+}
+
+.aq-hero {
+  border: 1px solid var(--aq-border);
+  border-left: 5px solid var(--aq-blue-600);
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(239,247,255,0.96));
+  box-shadow: var(--aq-shadow);
+}
+
+.dark .aq-hero {
+  background: linear-gradient(135deg, #081d38, #0b2545);
+}
+
+.aq-card {
+  border: 1px solid var(--aq-border);
+  border-radius: 0.375rem;
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(0, 87, 184, 0.08);
+}
+
+.dark .aq-card {
+  background: #081d38;
+}
+
+.aq-subtle-panel {
+  border: 1px solid var(--aq-border);
+  border-radius: 0.375rem;
+  background: var(--aq-blue-50);
+}
+
+.dark .aq-subtle-panel {
+  background: #0b2545;
+}
+
+.aq-metric {
+  border: 1px solid var(--aq-border);
+  border-radius: 0.375rem;
+  background: var(--aq-blue-50);
+  padding: 0.875rem;
+}
+
+.dark .aq-metric {
+  background: #0b2545;
+}
+
+.aq-row-card {
+  border: 1px solid var(--aq-border);
+  border-radius: 0.375rem;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 87, 184, 0.07);
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.aq-row-card:hover {
+  box-shadow: var(--aq-shadow);
+  transform: translateY(-1px);
+}
+
+.dark .aq-row-card {
+  background: #081d38;
+}
+
+.aq-input {
+  border: 1px solid var(--aq-border);
+  border-radius: 0.375rem;
+  background: #ffffff;
+  color: var(--aq-ink);
+}
+
+.dark .aq-input {
+  background: #081d38;
+}
+
+.aq-section-title {
+  color: var(--aq-ink);
+  font-weight: 700;
+  line-height: 1.2;
 }

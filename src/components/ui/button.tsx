@@ -4,16 +4,16 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-semibold transition disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-950",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border text-sm font-bold transition disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--aq-blue-600)] focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-[#061227]",
   {
     variants: {
       variant: {
-        default: "bg-blue-700 text-white shadow-sm hover:bg-blue-800 dark:bg-blue-500 dark:text-white dark:hover:bg-blue-400",
-        hero: "bg-blue-700 text-white shadow-sm hover:bg-blue-800 dark:bg-blue-500 dark:text-white dark:hover:bg-blue-400",
-        success: "bg-emerald-600 text-white hover:bg-emerald-700",
-        danger: "bg-rose-500 text-white hover:bg-rose-600",
-        ghost: "bg-transparent text-slate-700 hover:bg-blue-50 hover:text-blue-800 dark:text-slate-200 dark:hover:bg-blue-500/10 dark:hover:text-blue-100",
-        soft: "border border-blue-200 bg-blue-50 text-blue-800 shadow-sm hover:border-blue-300 hover:bg-blue-100 dark:border-blue-800/70 dark:bg-blue-950/50 dark:text-blue-100 dark:hover:bg-blue-900/70"
+        default: "border-[var(--aq-blue-700)] bg-[var(--aq-blue-700)] text-white shadow-sm hover:bg-[var(--aq-blue-800)] dark:border-[var(--aq-blue-500)] dark:bg-[var(--aq-blue-700)]",
+        hero: "border-[var(--aq-blue-700)] bg-[var(--aq-blue-700)] text-white shadow-[0_10px_24px_rgba(0,87,184,0.25)] hover:bg-[var(--aq-blue-800)] dark:border-[var(--aq-blue-500)] dark:bg-[var(--aq-blue-600)] dark:text-[#061227]",
+        success: "border-emerald-600 bg-emerald-600 text-white hover:bg-emerald-700",
+        danger: "border-rose-500 bg-rose-500 text-white hover:bg-rose-600",
+        ghost: "border-transparent bg-transparent text-[var(--aq-muted)] hover:border-[var(--aq-border)] hover:bg-[var(--aq-blue-50)] hover:text-[var(--aq-blue-800)] dark:hover:bg-[var(--aq-blue-50)] dark:hover:text-[var(--aq-ink)]",
+        soft: "border-[var(--aq-border)] bg-[var(--aq-blue-50)] text-[var(--aq-blue-800)] shadow-sm hover:bg-[var(--aq-blue-100)] dark:bg-[var(--aq-blue-50)] dark:text-[var(--aq-ink)]"
       },
       size: {
         default: "h-10 px-4 py-2",

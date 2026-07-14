@@ -42,24 +42,25 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const certSlug = currentCertFromPath(pathname);
   const mobileNav = navItems.map((item) => ({ ...item, to: item.to.replace("sc-300", certSlug).replace("SC-300", certSlug.toUpperCase()) }));
   const pageTitle = pageTitleFromPath(pathname);
+  const showMobileNav = !pathname.includes("/arena");
 
   return (
     <div className={cn(
-      "min-h-screen text-slate-950 dark:text-white",
+      "min-h-screen text-[var(--aq-ink)]",
       settings.lowBandwidth
         ? "bg-slate-50 dark:bg-slate-950"
-        : "bg-[linear-gradient(180deg,#ffffff,#f5f9ff)] dark:bg-[linear-gradient(180deg,#07111f,#0b1728)]"
+        : "aq-page-shell"
     )}>
-      <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur dark:border-blue-900/50 dark:bg-slate-950/95">
+      <header className="sticky top-0 z-40 border-b border-[var(--aq-border)] bg-white/95 shadow-sm backdrop-blur dark:bg-[#061227]/95">
         {/* Mobile app bar */}
         <div className="flex h-14 items-center justify-between px-4 sm:hidden">
           <Link to="/" className="flex items-center gap-2 font-semibold">
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-blue-700 text-sm font-bold text-white shadow-sm dark:bg-blue-500">AQ</span>
-            <span className="text-base">Azure Quest</span>
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-[var(--aq-border)] bg-[var(--aq-blue-700)] text-sm font-extrabold text-white shadow-sm">AQ</span>
+            <span className="text-base font-extrabold">Azure Quest</span>
           </Link>
           <button
             onClick={() => void setSettings({ darkMode: !settings.darkMode })}
-            className="grid h-9 w-9 place-items-center rounded-md border border-blue-100 bg-blue-50 dark:border-blue-900 dark:bg-blue-950"
+            className="grid h-9 w-9 place-items-center rounded-lg border border-[var(--aq-border)] bg-[var(--aq-blue-50)] text-[var(--aq-blue-800)]"
             aria-label="Toggle dark mode"
           >
             {settings.darkMode ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
@@ -69,25 +70,36 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {/* Desktop header */}
         <div className="mx-auto hidden max-w-6xl items-center justify-between px-4 py-3 sm:flex">
           <Link to="/" className="flex min-w-0 items-center gap-2 font-semibold">
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-blue-700 text-lg text-white shadow-sm dark:bg-blue-500">AQ</span>
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-[var(--aq-border)] bg-[var(--aq-blue-700)] text-lg font-extrabold text-white shadow-sm">AQ</span>
             <span className="min-w-0">
-              <span className="block truncate">Azure Quest</span>
-              <span className="block text-xs font-extrabold text-slate-500 dark:text-slate-400">Practice exams · interview readiness</span>
+              <span className="block truncate text-base font-extrabold">Azure Quest</span>
+              <span className="block text-xs font-extrabold text-slate-500 dark:text-slate-400">Practice exams / interview readiness</span>
             </span>
           </Link>
           <div className="hidden items-center gap-1 lg:flex">
-            <Link to={`/cert/${certSlug}/knowledge`} className="rounded-md px-3 py-2 text-sm font-semibold hover:bg-blue-50 hover:text-blue-800 dark:hover:bg-blue-500/10 dark:hover:text-blue-100">Exams</Link>
-            <Link to={`/cert/${certSlug}/readiness`} className="rounded-md px-3 py-2 text-sm font-semibold hover:bg-blue-50 hover:text-blue-800 dark:hover:bg-blue-500/10 dark:hover:text-blue-100">Exam Readiness</Link>
-            <Link to={`/cert/${certSlug}/job`} className="rounded-md px-3 py-2 text-sm font-semibold hover:bg-blue-50 hover:text-blue-800 dark:hover:bg-blue-500/10 dark:hover:text-blue-100">Job Readiness</Link>
-            <Link to={`/history?cert=${certSlug.toUpperCase()}`} className="rounded-md px-3 py-2 text-sm font-semibold hover:bg-blue-50 hover:text-blue-800 dark:hover:bg-blue-500/10 dark:hover:text-blue-100">History</Link>
-            <Link to="/settings" className="rounded-md px-3 py-2 text-sm font-semibold hover:bg-blue-50 hover:text-blue-800 dark:hover:bg-blue-500/10 dark:hover:text-blue-100">Settings</Link>
+            {mobileNav.map((item) => (
+              <NavLink
+                key={item.label}
+                to={item.to}
+                className={({ isActive }) =>
+                  cn(
+                    "rounded-md border px-3 py-2 text-sm font-semibold transition",
+                    isActive
+                      ? "border-[var(--aq-border)] bg-[var(--aq-blue-50)] text-[var(--aq-blue-800)] dark:bg-[#0f3a67] dark:text-[#e7f3ff]"
+                      : "border-transparent text-[var(--aq-muted)] hover:border-[var(--aq-border)] hover:bg-[var(--aq-blue-50)] hover:text-[var(--aq-blue-800)]"
+                  )
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
           </div>
           <div className="flex shrink-0 items-center gap-2">
-            <div className="hidden items-center gap-2 rounded-md border border-blue-100 bg-blue-50 px-3 py-2 text-sm font-semibold dark:border-blue-900 dark:bg-blue-950 md:flex">
+            <div className="hidden items-center gap-2 rounded-lg border border-[var(--aq-border)] bg-[var(--aq-blue-50)] px-3 py-2 text-sm font-bold md:flex">
               {settings.lowBandwidth ? <WifiOff className="h-4 w-4" /> : <Wifi className="h-4 w-4" />}
               <Switch checked={settings.lowBandwidth} onCheckedChange={(v) => void setSettings({ lowBandwidth: v })} label="Low bandwidth" />
             </div>
-            <div className="flex items-center gap-2 rounded-md border border-blue-100 bg-blue-50 px-3 py-2 text-sm font-semibold dark:border-blue-900 dark:bg-blue-950">
+            <div className="flex items-center gap-2 rounded-lg border border-[var(--aq-border)] bg-[var(--aq-blue-50)] px-3 py-2 text-sm font-bold">
               {settings.darkMode ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
               <Switch checked={settings.darkMode} onCheckedChange={(v) => void setSettings({ darkMode: v })} label="Dark mode" />
             </div>
@@ -102,7 +114,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </footer>
       </main>
 
-      <nav className="fixed bottom-3 left-1/2 z-50 w-[calc(100%-1.5rem)] max-w-lg -translate-x-1/2 rounded-lg border border-slate-200 bg-white/95 p-2 shadow-card backdrop-blur dark:border-blue-900/60 dark:bg-slate-950/95 sm:hidden">
+      {showMobileNav ? <nav className="fixed bottom-3 left-1/2 z-50 w-[calc(100%-1.5rem)] max-w-lg -translate-x-1/2 rounded-md border border-[var(--aq-border)] bg-white/95 p-2 shadow-[var(--aq-shadow)] backdrop-blur dark:bg-[#061227]/95 sm:hidden">
         <div className="grid grid-cols-5 gap-1">
           {mobileNav.map((item) => {
             const Icon = item.icon;
@@ -112,10 +124,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 to={item.to}
                 className={({ isActive }) =>
                   cn(
-                    "flex min-h-14 flex-col items-center justify-center gap-1 rounded-md px-1 py-2 text-center text-[0.58rem] font-semibold leading-tight transition",
+                    "flex min-h-14 flex-col items-center justify-center gap-1 rounded-lg border px-1 py-2 text-center text-[0.58rem] font-bold leading-tight transition",
                     isActive
-                      ? "bg-blue-50 text-blue-800 shadow-sm dark:bg-blue-950 dark:text-blue-100"
-                      : "text-slate-500 dark:text-slate-400"
+                      ? "border-[var(--aq-border)] bg-[var(--aq-blue-50)] text-[var(--aq-blue-800)] shadow-sm dark:bg-[#0f3a67] dark:text-[#e7f3ff]"
+                      : "border-transparent text-[var(--aq-muted)]"
                   )
                 }
               >
@@ -125,7 +137,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             );
           })}
         </div>
-      </nav>
+      </nav> : null}
     </div>
   );
 }

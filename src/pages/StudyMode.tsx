@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Baby, Sparkles } from "lucide-react";
+import { ArrowLeft, BookOpen, Sparkles } from "lucide-react";
 import { concepts } from "../data/concepts";
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
@@ -25,29 +25,29 @@ export function StudyMode() {
       </div>
 
       <motion.div key={concept.id} initial={{ scale: 0.96, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
-        <Card className="min-h-[520px] overflow-hidden bg-gradient-to-br from-white to-sky-50 dark:from-slate-900 dark:to-slate-800">
+        <Card className="aq-hero min-h-[520px] overflow-hidden">
           <CardHeader>
             <div>
-              <Badge className="mb-3 bg-violet-500 text-white">{concept.cert}</Badge>
+              <Badge className="mb-3 border-[var(--aq-blue-600)] bg-[var(--aq-blue-700)] text-white">{concept.cert}</Badge>
               <CardTitle className="text-4xl">{concept.emoji} {concept.title}</CardTitle>
             </div>
-            <Sparkles className="h-8 w-8 text-amber-400" />
+            <Sparkles className="h-8 w-8 text-[var(--aq-blue-600)]" />
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-black leading-tight">{concept.punchline}</p>
-            <pre className="rounded-[1.5rem] bg-slate-950 p-5 text-center text-lg font-black text-sky-200">{concept.diagram}</pre>
-            <div className="rounded-[1.5rem] bg-amber-100 p-5 text-amber-950 dark:bg-amber-400/20 dark:text-amber-100">
-              <p className="text-xs font-black uppercase tracking-wide opacity-70">Quick highlight</p>
-              <p className="text-xl font-black">{concept.highlight}</p>
+            <p className="text-2xl font-semibold leading-tight">{concept.punchline}</p>
+            <pre className="rounded-md border border-[var(--aq-border)] bg-[#061227] p-5 text-center text-lg font-semibold text-[#d7ebff]">{concept.diagram}</pre>
+            <div className="aq-subtle-panel p-5">
+              <p className="text-xs font-semibold uppercase tracking-wide text-[var(--aq-muted)]">Quick highlight</p>
+              <p className="text-xl font-semibold">{concept.highlight}</p>
             </div>
 
             {eli5 ? (
-              <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="rounded-[1.5rem] bg-blue-100 p-5 text-blue-950 dark:bg-blue-500/20 dark:text-blue-100">
-                <p className="mb-1 flex items-center gap-2 text-xs font-black uppercase tracking-wide"><Baby className="h-4 w-4" /> Explain like I’m 5</p>
-                <p className="text-xl font-black">{concept.eli5}</p>
-                <div className="mt-4 rounded-2xl bg-white/70 p-4 text-slate-800 dark:bg-black/20 dark:text-blue-50">
-                  <p className="text-xs font-black uppercase tracking-wide opacity-70">Real-life concept</p>
-                  <p className="mt-1 text-lg font-black">{concept.realLife}</p>
+              <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="aq-subtle-panel p-5">
+                <p className="mb-1 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-[var(--aq-muted)]"><BookOpen className="h-4 w-4" /> Plain-language explanation</p>
+                <p className="text-xl font-semibold">{concept.eli5}</p>
+                <div className="mt-4 rounded-md border border-[var(--aq-border)] bg-white/80 p-4 dark:bg-[#081d38]">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--aq-muted)]">Real-world comparison</p>
+                  <p className="mt-1 text-lg font-semibold">{concept.realLife}</p>
                 </div>
               </motion.div>
             ) : null}
@@ -56,8 +56,8 @@ export function StudyMode() {
       </motion.div>
 
       <div className="grid gap-3 sm:grid-cols-2">
-        <Button onClick={() => setEli5((v) => !v)} variant="soft" size="lg" className="h-16"><Baby /> Explain Like I’m 5</Button>
-        <Button onClick={next} variant="hero" size="lg" className="h-16">Next bite</Button>
+        <Button onClick={() => setEli5((v) => !v)} variant="soft" size="lg" className="h-16"><BookOpen /> Plain-language view</Button>
+        <Button onClick={next} variant="hero" size="lg" className="h-16">Next concept</Button>
       </div>
     </motion.div>
   );

@@ -24,8 +24,8 @@ function validMode(value: string | null): ExamMode {
 }
 
 function optionTone(optionId: QuizOption["id"], selected: QuizOption["id"] | null) {
-  if (optionId === selected) return "border-blue-600 bg-blue-700 text-white ring-2 ring-blue-200 dark:border-blue-400 dark:bg-blue-500 dark:ring-blue-800";
-  return "border-slate-200 bg-white text-blue-950 hover:border-blue-300 hover:bg-blue-50 dark:border-blue-900/60 dark:bg-slate-950 dark:text-blue-50 dark:hover:border-blue-700 dark:hover:bg-blue-950";
+  if (optionId === selected) return "border-[var(--aq-blue-600)] bg-[var(--aq-blue-700)] text-white ring-2 ring-[var(--aq-blue-100)] dark:bg-[var(--aq-blue-600)] dark:text-[#061227]";
+  return "border-[#9cc9f5] bg-white text-[var(--aq-ink)] hover:border-[var(--aq-blue-600)] hover:bg-[var(--aq-blue-50)] dark:border-[#24486f] dark:bg-[#081d38] dark:text-[#e7f3ff] dark:hover:bg-[#0b2545]";
 }
 
 export function PracticeArena() {
@@ -228,7 +228,7 @@ export function PracticeArena() {
           <div className="space-y-1">
             <Badge className="mb-4 border-blue-500/40 bg-blue-500/20 text-blue-100">{cert}</Badge>
             <h2 className="text-2xl font-semibold text-white">{examTitle}</h2>
-            <p className="text-sm text-slate-400">{count} questions · {minutes} min</p>
+            <p className="text-sm text-slate-400">{count} questions / {minutes} min</p>
             <p className="mx-auto max-w-xs pt-3 text-xs font-semibold text-emerald-200">{MICROSOFT_DISCLAIMER}</p>
           </div>
 
@@ -295,23 +295,23 @@ export function PracticeArena() {
   if (finished) {
     return (
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
-        <Card className={finalAttempt.passed ? "border-blue-700 bg-blue-700 text-white dark:border-blue-500 dark:bg-blue-950" : "border-slate-900 bg-slate-950 text-white"}>
+        <Card className="aq-hero">
           <CardHeader>
             <div>
-              <Badge className="border-white/20 bg-white/15 text-white">{finalAttempt.kind.toUpperCase()} COMPLETE</Badge>
-              <CardTitle className="mt-3 text-3xl">{examTitle}</CardTitle>
-              <p className="font-medium opacity-80">{formatSeconds(finalAttempt.timeTakenSeconds)} used · {formatSeconds(timeLimitSeconds)} limit</p>
+              <Badge className={finalAttempt.passed ? "border-emerald-500 bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-100" : "border-amber-400 bg-amber-50 text-amber-900 dark:bg-amber-950 dark:text-amber-100"}>{finalAttempt.kind.toUpperCase()} COMPLETE</Badge>
+              <CardTitle className="mt-3 text-2xl font-bold sm:text-3xl">{examTitle}</CardTitle>
+              <p className="font-semibold text-[var(--aq-muted)]">{formatSeconds(finalAttempt.timeTakenSeconds)} used / {formatSeconds(timeLimitSeconds)} limit</p>
             </div>
             <div className="text-right">
-              <div className="text-3xl font-semibold">{finalAttempt.percentage}%</div>
-              <p className="text-sm font-semibold">{finalAttempt.passed ? "Passed" : "Needs review"}</p>
+              <div className="text-4xl font-bold text-[var(--aq-blue-700)] dark:text-[var(--aq-blue-500)]">{finalAttempt.percentage}%</div>
+              <p className="text-sm font-bold text-[var(--aq-muted)]">{finalAttempt.passed ? "Passed" : "Needs review"}</p>
             </div>
           </CardHeader>
-          <Progress value={finalAttempt.percentage} className="bg-white/30" />
+          <Progress value={finalAttempt.percentage} />
           <div className="mt-5 grid grid-cols-3 gap-3 text-center">
-            <div className="rounded-lg border border-white/20 bg-white/15 p-3"><p className="text-xl font-semibold">{finalAttempt.score}</p><p className="text-xs font-semibold">Correct</p></div>
-            <div className="rounded-lg border border-white/20 bg-white/15 p-3"><p className="text-xl font-semibold">{finalAttempt.total}</p><p className="text-xs font-semibold">Total</p></div>
-            <div className="rounded-lg border border-white/20 bg-white/15 p-3"><p className="text-xl font-semibold">+{finalAttempt.readinessDelta ?? 0}</p><p className="text-xs font-semibold">Readiness</p></div>
+            <div className="aq-metric"><p className="text-xl font-bold">{finalAttempt.score}</p><p className="text-xs font-bold uppercase tracking-[0.04em] text-[var(--aq-muted)]">Correct</p></div>
+            <div className="aq-metric"><p className="text-xl font-bold">{finalAttempt.total}</p><p className="text-xs font-bold uppercase tracking-[0.04em] text-[var(--aq-muted)]">Total</p></div>
+            <div className="aq-metric"><p className="text-xl font-bold">+{finalAttempt.readinessDelta ?? 0}</p><p className="text-xs font-bold uppercase tracking-[0.04em] text-[var(--aq-muted)]">Readiness</p></div>
           </div>
         </Card>
 
@@ -330,7 +330,7 @@ export function PracticeArena() {
           <div className="grid gap-3">
             {Object.entries(finalAttempt.domains).map(([domain, stats]) => {
               const pct = Math.round((stats.correct / stats.total) * 100);
-              return <div key={domain} className="rounded-xl bg-slate-100 p-3 dark:bg-white/10"><div className="mb-2 flex justify-between gap-3 text-sm font-semibold"><span>{domain}</span><span>{stats.correct}/{stats.total} · {pct}%</span></div><Progress value={pct} /></div>;
+              return <div key={domain} className="aq-subtle-panel p-3"><div className="mb-2 flex justify-between gap-3 text-sm font-semibold"><span>{domain}</span><span>{stats.correct}/{stats.total} / {pct}%</span></div><Progress value={pct} /></div>;
             })}
           </div>
         </Card>
@@ -346,14 +346,14 @@ export function PracticeArena() {
               const correctText = q.options.find((o) => o.id === q.answer)?.text ?? q.answer;
               const ok = chosen === q.answer;
               return (
-                <details key={q.id} className="rounded-xl bg-slate-100 p-4 dark:bg-white/10">
-                  <summary className="cursor-pointer text-sm font-semibold">{i + 1}. {ok ? "Correct" : "Missed"} · {q.domain}</summary>
+                <details key={q.id} className="aq-row-card p-4">
+                  <summary className="cursor-pointer text-sm font-semibold">{i + 1}. {ok ? "Correct" : "Missed"} / {q.domain}</summary>
                   <p className="mt-3 font-semibold">{q.stem}</p>
                   <div className="mt-3 grid gap-2 text-sm font-medium">
                     <p className={ok ? "text-blue-600 dark:text-blue-300" : "text-rose-600 dark:text-rose-300"}>Your answer: {chosen ? `${chosen}. ${chosenText}` : "Unanswered"}</p>
                     <p className="text-blue-700 dark:text-blue-300">Correct answer: {q.answer}. {correctText}</p>
                     <p className="text-slate-600 dark:text-slate-300">{q.explanation}</p>
-                    {!ok && chosen && q.whyWrong[chosen] ? <p className="rounded-xl bg-white p-3 dark:bg-black/20">Why your answer missed: {q.whyWrong[chosen]}</p> : null}
+                    {!ok && chosen && q.whyWrong[chosen] ? <p className="aq-subtle-panel p-3">Why your answer missed: {q.whyWrong[chosen]}</p> : null}
                   </div>
                 </details>
               );
@@ -383,10 +383,10 @@ export function PracticeArena() {
         </div>
       </div>
 
-      <Card className="overflow-hidden">
+      <Card className="overflow-hidden border-l-4 border-l-[var(--aq-blue-600)]">
         <CardHeader>
           <div>
-            <Badge className="mb-2 bg-blue-700 text-white dark:border-blue-500 dark:bg-blue-500">{question.scenarioOrg}</Badge>
+            <Badge className="mb-2 border-[var(--aq-blue-600)] bg-[var(--aq-blue-700)] text-white">{question.scenarioOrg}</Badge>
             <CardTitle className="text-xl">Question {index + 1}/{exam.questions.length}</CardTitle>
             <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{question.domain}</p>
           </div>
@@ -399,11 +399,11 @@ export function PracticeArena() {
       </Card>
 
       <motion.div key={question.id} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
-        <Card className="border-blue-100 dark:border-blue-900/60">
+        <Card className="border-[var(--aq-border)]">
           <CardContent>
             <p className="text-xl font-semibold leading-tight">{question.stem}</p>
             {question.diagram ? <pre className="rounded-lg bg-slate-950 p-4 text-sm font-medium text-sky-200 dark:bg-black/40">{question.diagram}</pre> : null}
-            <div className="mt-4 rounded-lg border border-dashed border-blue-200 bg-blue-50 p-3 dark:border-blue-900/70 dark:bg-blue-950/30">
+            <div className="aq-subtle-panel mt-4 border-dashed p-3">
               <button
                 type="button"
                 onClick={() => setFlaggedQuestionIds((prev) => ({ ...prev, [question.id]: !prev[question.id] }))}
@@ -427,7 +427,7 @@ export function PracticeArena() {
           ))}
         </div>
 
-        <div className="sticky bottom-24 z-20 sm:static">
+        <div className="sticky bottom-4 z-20 rounded-md border border-[var(--aq-border)] bg-white/95 p-2 shadow-[var(--aq-shadow)] backdrop-blur dark:bg-[#061227]/95 sm:static sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none sm:backdrop-blur-0">
           <div className="grid grid-cols-[auto_1fr_auto] gap-2">
             <Button onClick={prev} disabled={index === 0} size="lg" variant="soft" className="h-12 px-4"><ArrowLeft className="h-4 w-4" /></Button>
             <Button onClick={next} disabled={!selected} size="lg" variant="hero" className="h-12 text-sm">{index + 1 >= exam.questions.length ? "Finish run" : "Next question"}</Button>

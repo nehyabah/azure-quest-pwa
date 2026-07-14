@@ -107,19 +107,19 @@ export function PastExams() {
     const title = attemptTitle(attempt);
     const limit = attempt.timeLimitSeconds;
     return (
-      <Card key={attempt.id}>
+      <Card key={attempt.id} className="aq-row-card">
         <CardHeader>
           <div className="min-w-0">
             <div className="mb-2 flex flex-wrap items-center gap-2">
               <Badge>{attempt.cert}</Badge>
-              <Badge className="bg-slate-200 text-slate-700 dark:bg-white/10 dark:text-slate-300">{kindLabels[currentKind]}</Badge>
-              <Badge className={attempt.percentage >= 70 ? "bg-blue-500 text-white" : "bg-amber-300 text-slate-950"}>{attempt.percentage >= 70 ? "Pass" : "Review"}</Badge>
+              <Badge>{kindLabels[currentKind]}</Badge>
+              <Badge className={attempt.percentage >= 70 ? "border-[var(--aq-blue-600)] bg-[var(--aq-blue-700)] text-white" : "border-amber-300 bg-amber-50 text-amber-900 dark:bg-amber-300 dark:text-slate-950"}>{attempt.percentage >= 70 ? "Pass" : "Review"}</Badge>
             </div>
             <CardTitle className="truncate text-base sm:text-xl">{title}</CardTitle>
             <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">{attempt.score}/{attempt.total} correct - {attempt.percentage}%</p>
           </div>
           <div className="shrink-0 text-right">
-            <p className="text-2xl font-black">+{attempt.readinessDelta ?? 0}</p>
+            <p className="text-2xl font-bold">+{attempt.readinessDelta ?? 0}</p>
             <p className="text-xs font-semibold text-slate-400 dark:text-slate-500">readiness</p>
           </div>
         </CardHeader>
@@ -134,7 +134,7 @@ export function PastExams() {
             {Object.entries(attempt.domains).map(([domain, stats]) => {
               const pct = Math.round((stats.correct / stats.total) * 100);
               return (
-                <div key={domain} className="rounded-xl bg-slate-100 p-3 dark:bg-white/10">
+                <div key={domain} className="aq-subtle-panel p-3">
                   <div className="mb-2 flex items-start justify-between gap-3">
                     <span className="text-sm font-semibold leading-snug text-slate-800 dark:text-slate-100">{domain}</span>
                     <span className="shrink-0 text-sm font-bold text-slate-500 dark:text-slate-400">{stats.correct}/{stats.total} - {pct}%</span>
@@ -156,26 +156,26 @@ export function PastExams() {
 
   return (
     <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
-      <Card>
+      <Card className="aq-hero">
         <CardHeader>
           <div>
-            <CardTitle className="text-xl sm:text-2xl">Past Exams, Quizzes & Labs</CardTitle>
-            <p className="mt-1 text-sm font-medium text-slate-500 dark:text-slate-400">Separate score reports for exams, quizzes, timing, domains, retakes, and weak-area insights.</p>
+            <CardTitle className="text-2xl font-bold sm:text-3xl">Past Exams, Quizzes & Labs</CardTitle>
+            <p className="mt-1 text-sm font-semibold text-[var(--aq-muted)]">Separate score reports for exams, quizzes, timing, domains, retakes, and weak-area insights.</p>
           </div>
-          <Badge className="shrink-0 bg-amber-300 text-slate-950">{attempts.length} attempts</Badge>
+          <Badge className="shrink-0 border-[var(--aq-blue-600)] bg-[var(--aq-blue-700)] text-white">{attempts.length} attempts</Badge>
         </CardHeader>
         <div className="grid grid-cols-3 gap-2 sm:gap-3">
-          <div className="rounded-xl bg-slate-100 p-3 dark:bg-white/10 sm:rounded-2xl sm:p-4">
-            <p className="text-xl font-black text-slate-900 dark:text-white sm:text-2xl">{totals.exams}</p>
-            <p className="mt-0.5 text-xs font-semibold text-slate-600 dark:text-slate-300">Exam attempts</p>
+          <div className="aq-metric">
+            <p className="text-xl font-bold sm:text-2xl">{totals.exams}</p>
+            <p className="mt-0.5 text-xs font-bold uppercase tracking-[0.04em] text-[var(--aq-muted)]">Exam attempts</p>
           </div>
-          <div className="rounded-xl bg-slate-100 p-3 dark:bg-white/10 sm:rounded-2xl sm:p-4">
-            <p className="text-xl font-black text-slate-900 dark:text-white sm:text-2xl">{totals.quizzes}</p>
-            <p className="mt-0.5 text-xs font-semibold text-slate-600 dark:text-slate-300">Quiz attempts</p>
+          <div className="aq-metric">
+            <p className="text-xl font-bold sm:text-2xl">{totals.quizzes}</p>
+            <p className="mt-0.5 text-xs font-bold uppercase tracking-[0.04em] text-[var(--aq-muted)]">Quiz attempts</p>
           </div>
-          <div className="rounded-xl bg-slate-100 p-3 dark:bg-white/10 sm:rounded-2xl sm:p-4">
-            <p className="text-xl font-black text-slate-900 dark:text-white sm:text-2xl">{totals.avg}%</p>
-            <p className="mt-0.5 text-xs font-semibold text-slate-600 dark:text-slate-300">Average score</p>
+          <div className="aq-metric">
+            <p className="text-xl font-bold sm:text-2xl">{totals.avg}%</p>
+            <p className="mt-0.5 text-xs font-bold uppercase tracking-[0.04em] text-[var(--aq-muted)]">Average score</p>
           </div>
         </div>
       </Card>
@@ -183,9 +183,9 @@ export function PastExams() {
       <Card>
         <CardHeader><CardTitle>Filter reports</CardTitle><Filter className="h-5 w-5 text-slate-400" /></CardHeader>
         <div className="grid gap-3 sm:grid-cols-[1fr_auto_auto]">
-          <label className="flex items-center gap-2 rounded-xl border border-slate-300 bg-slate-100 px-4 py-2.5 text-sm font-medium dark:border-white/15 dark:bg-slate-800"><Search className="h-4 w-4 shrink-0 text-slate-500 dark:text-slate-400" /><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search title" className="w-full bg-transparent text-slate-900 outline-none placeholder:text-slate-400 dark:text-white" /></label>
-          <select value={cert} onChange={(e) => setCert(e.target.value as Cert | "all")} className="rounded-xl border border-slate-300 bg-slate-100 px-4 py-2.5 text-sm font-semibold text-slate-900 dark:border-white/15 dark:bg-slate-800 dark:text-white"><option value="all">All certs</option><option value="SC-300">SC-300</option><option value="AZ-500">AZ-500</option><option value="SC-500">SC-500</option></select>
-          <select value={kind} onChange={(e) => setKind(e.target.value as AttemptKind | "all")} className="rounded-xl border border-slate-300 bg-slate-100 px-4 py-2.5 text-sm font-semibold text-slate-900 dark:border-white/15 dark:bg-slate-800 dark:text-white">{Object.entries(kindLabels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select>
+          <label className="aq-input flex items-center gap-2 px-4 py-2.5 text-sm font-medium"><Search className="h-4 w-4 shrink-0 text-[var(--aq-muted)]" /><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search title" className="w-full bg-transparent text-[var(--aq-ink)] outline-none placeholder:text-[var(--aq-muted)]" /></label>
+          <select value={cert} onChange={(e) => setCert(e.target.value as Cert | "all")} className="aq-input px-4 py-2.5 text-sm font-semibold"><option value="all">All certs</option><option value="SC-300">SC-300</option><option value="AZ-500">AZ-500</option><option value="SC-500">SC-500</option></select>
+          <select value={kind} onChange={(e) => setKind(e.target.value as AttemptKind | "all")} className="aq-input px-4 py-2.5 text-sm font-semibold">{Object.entries(kindLabels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select>
         </div>
       </Card>
 

@@ -21,8 +21,8 @@ export const certPaths: CertPathMeta[] = [
     summary: "Master Entra ID, Conditional Access, workload identities, PIM, access reviews, and identity governance.",
     targetRoles: ["IAM Analyst", "Identity Engineer", "Entra Administrator", "Cloud Security Analyst"],
     readinessTarget: 80,
-    examFormat: "50 questions · 100 minutes · weighted by domain",
-    quizFormat: "10 questions · 12 minutes · focused sprints"
+    examFormat: "50 questions / 100 minutes / weighted by domain",
+    quizFormat: "10 questions / 12 minutes / focused sprints"
   },
   {
     cert: "AZ-500",
@@ -32,8 +32,8 @@ export const certPaths: CertPathMeta[] = [
     summary: "Secure identity, networks, compute, storage, databases, Defender for Cloud, and Microsoft Sentinel.",
     targetRoles: ["Azure Security Engineer", "Cloud Security Engineer", "Cloud SOC Analyst", "Security Operations Engineer"],
     readinessTarget: 82,
-    examFormat: "50 questions · 100 minutes · Defender/Sentinel heavy",
-    quizFormat: "10 questions · 12 minutes · domain-based drills"
+    examFormat: "50 questions / 100 minutes / Defender/Sentinel heavy",
+    quizFormat: "10 questions / 12 minutes / domain-based drills"
   },
   {
     cert: "SC-500",
@@ -43,8 +43,8 @@ export const certPaths: CertPathMeta[] = [
     summary: "Prepare for cloud, hybrid, multicloud, Microsoft security posture, Copilot, AI workload, and agent security.",
     targetRoles: ["Cloud Security Engineer", "AI Security Engineer", "Cloud SOC Engineer", "Security Engineer"],
     readinessTarget: 82,
-    examFormat: "50 questions · 100 minutes · cloud + AI security mix",
-    quizFormat: "10 questions · 12 minutes · modern security sprints"
+    examFormat: "50 questions / 100 minutes / cloud + AI security mix",
+    quizFormat: "10 questions / 12 minutes / modern security sprints"
   }
 ];
 

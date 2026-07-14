@@ -110,6 +110,38 @@ Acceptance tests needed:
 - Removed the stale `/learn` call-to-action from the legacy dashboard.
 - Hardened attempt persistence so save errors are surfaced and retryable.
 
+## M1.5 Follow-Up Audit
+
+Follow-up audit requested on 2026-07-14 after the first M1.5 visual pass was judged too timid.
+
+Three subagents completed read-only audits:
+
+- UI/UX Revamp Lead: Volta
+- Senior Software Developer: Cicero
+- QA and Product Lead: Huygens
+
+Release-blocking or high-impact findings:
+
+- Job Readiness still carried the weakest polish, including violet accents, oversized rounded panels, old slate-heavy selected states, and heavy typography.
+- History attempt cards lagged behind the newer landing surfaces.
+- Global Azure borders were too saturated and the page background was too busy.
+- A remote Google font import was risky for PWA/offline and low-bandwidth behavior.
+- Low-bandwidth mode was visually overridden by the richer page shell.
+- Selectable Job Readiness buttons lacked explicit selected-state semantics.
+- Mojibake cleanup damaged interview coaching copy with strings such as `thinking-not`, `notifications-all`, `gaps-stale`, `done-in`, and `principal-is`.
+- Study Mode still had childish learner-facing copy: Explain Like I'm 5 and Next bite.
+- Readiness trend copy used developer shorthand: `-> same`.
+
+Follow-up actions taken:
+
+- Removed the remote font import and moved to a professional system font stack.
+- Softened Azure borders, reduced shadows, and simplified page backgrounds.
+- Fixed low-bandwidth mode so it bypasses the richer page shell.
+- Reworked Job Readiness, History, Study Mode, and Readiness copy/styling to match the M1.5 professional tone.
+- Added `aria-pressed` to key selectable Job Readiness controls.
+- Fixed the damaged interview coaching copy.
+- Re-ran lint, harness validation, question validation, route checks, and production build.
+
 ## Recommended Next Step
 
 Finish M1 hardening by adding automated tests for exam scoring, Finish Now, history grouping, retake seed behavior, and demo-warning visibility.

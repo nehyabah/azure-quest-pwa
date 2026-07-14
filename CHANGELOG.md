@@ -2,9 +2,12 @@
 
 ## Unreleased
 
-- Started M1.5 professional Azure-blue design polish.
-- Updated shared UI primitives with cleaner typography, crisper borders, calmer Azure-blue buttons, badges, cards, and progress states.
-- Refined layout, path selection, cert overview, exam landing, and practice arena styling for a more professional product feel.
+- Completed a stronger M1.5 professional Azure-blue design correction after the first polish pass was judged visually insufficient.
+- Updated shared UI primitives with cleaner system typography, softer Azure borders, calmer Azure-blue buttons, badges, cards, progress states, and low-bandwidth-safe page backgrounds.
+- Refined layout, path selection, cert overview, exam landing, practice arena, readiness, history, study mode, and job readiness styling for a more professional product feel.
+- Reworked Job Readiness and History surfaces to remove remaining violet/slate-heavy styling, oversized radii, and unclear selected states.
+- Added selected-state semantics to key Job Readiness controls.
+- Fixed job-readiness copy regressions introduced by mojibake cleanup.
 - Replaced playful labels such as Daily Boss, Swipe Cards, and Cozy cyber cave with professional wording.
 - Moved retryable attempt-save error messaging onto the results screen where save failures actually surface.
 - Added a three-subagent harness: UI/UX Revamp Lead, Senior Software Engineer, and QA and Product Lead.

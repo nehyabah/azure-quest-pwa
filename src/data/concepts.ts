@@ -52,7 +52,7 @@ export const concepts: ConceptCard[] = [
     emoji: "NET",
     title: "NSGs are traffic lights",
     punchline: "Green for approved flows. Red for unapproved traffic.",
-    diagram: "Internet ✗ → Data\nApp ✓ → Data",
+    diagram: "Internet X -> Data\nApp OK -> Data",
     eli5: "Only the right cars can enter the right street.",
     realLife: "In a hub-spoke design, the app subnet can reach the database subnet on 1433, but random internet traffic and SSH from anywhere are blocked.",
     highlight: "Use subnet-specific rules, least-open ports, and source restrictions."
